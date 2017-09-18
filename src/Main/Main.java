@@ -46,7 +46,7 @@ public class Main {
     }
     public static void main (String [] args){
 
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src");
+        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
         //String direccion = new String("C:\\Users\\Joaking\\Desktop\\test2.txt");
 
@@ -57,6 +57,13 @@ public class Main {
 
         StringBuilder codigo = null;
         codigo = new StringBuilder( getCodigo( br ) );
-        System.out.print("hola negro");
+        ControladorArchivo archivo =new ControladorArchivo( codigo );
+        TablaSimbolos ts = new TablaSimbolos();
+        AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivo,ts);
+
+
+        System.out.println( analizadorLexico.mostrarTs() );
+        System.out.println(analizadorLexico.mostrarWarning());
+        System.out.println(analizadorLexico.mostrarErrorComp());
     }
 }
