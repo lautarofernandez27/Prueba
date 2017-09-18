@@ -1,2 +1,5 @@
-public class CeldaABS {
+public abstract class CeldaABS {
+    public abstract void ejecutarCelda(){
+
+    }
 }
