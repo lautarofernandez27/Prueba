@@ -62,7 +62,6 @@ public class AnalizadorLexico {
     //El estadoAnterior se utiliza para reconocer el token una vez que se llega al estado Final.
     private int estadoActual;
     private int estadoAnterior;
-    private int estadoAux;
 
     //Buffer del token, voy almacenando lo que leo.
     //Una vez que reconozco el tipo de token, lo vacio y vuelvo a empezar.
@@ -91,8 +90,13 @@ public class AnalizadorLexico {
 
         agregarTokens();
 
+
     }
 
+    public void consumirToken(){
+        while (!archivo.finArchivo())
+            sigToken();
+    }
 
     //Se encarga de agregar los valores correspondientes de cada token para ser identificados por el YACC
     public void agregarTokens(){
@@ -130,7 +134,6 @@ public class AnalizadorLexico {
             //Ejecuto el proximo estado
             celdaActual = matTrans.getCelda(estadoActual, matTrans.getColumna(new Character (ultimoChar) ) );
 
-            estadoAux = estadoAnterior;
             estadoAnterior = estadoActual;
 
             estadoActual = celdaActual.ejecutar_celda(null);
@@ -152,6 +155,7 @@ public class AnalizadorLexico {
             erroresWarning.add( new Error(warningI, "WI", lineaActual) );
         if (estadoActual == WC)
             erroresWarning.add( new Error(warningC, "WC", lineaActual) );
+        tokens.add(new Token( token_buffer.toString(), calcularUso(estadoAnterior,token_buffer.toString()) ) );
         return estadoAnterior;
     }
 

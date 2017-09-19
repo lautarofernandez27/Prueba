@@ -60,8 +60,9 @@ public class Main {
         ControladorArchivo archivo =new ControladorArchivo( codigo );
         TablaSimbolos ts = new TablaSimbolos();
         AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivo,ts);
+        analizadorLexico.consumirToken();
 
-
+        System.out.print(analizadorLexico.mostrarTokens());
         System.out.println( analizadorLexico.mostrarTs() );
         System.out.println(analizadorLexico.mostrarWarning());
         System.out.println(analizadorLexico.mostrarErrorComp());

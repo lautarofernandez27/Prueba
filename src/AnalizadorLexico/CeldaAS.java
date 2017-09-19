@@ -2,8 +2,8 @@ package AnalizadorLexico;
 
 public class CeldaAS extends CeldaABS{
 
-    private static final double maximoF = 2.2250738585072014E-308;
-    private static final double minimoF = -1.7976931348623157E308;
+    private static final double maximoF = 3.40282347E38;
+    private static final double minimoF = 1.17549435E-38;
     private static final long maximoL = 2147483647;
     private static final long minimoL = -2147483648;
 
@@ -48,7 +48,7 @@ public class CeldaAS extends CeldaABS{
                 if (t.getUso() == AnalizadorLexico.CTEF) {
                     t.setTipo("float");
                     String cadenaf = t.getNombre();
-                    double valorf= Double.parseDouble(cadenaf);
+                    double valorf= Double.parseDouble(cadenaf.replace(",","."));
                     t.setNombre(cadenaf);
                     if (valorf>maximoF){
                         t.setNombre(""+maximoF);//Coloco el mayor valor aceptado por float
