@@ -2,10 +2,10 @@ package AnalizadorLexico;
 
 public class CeldaAS extends CeldaABS{
 
-    public static final double maximoF = 2.2250738585072014E-308;
-    public static final double minimoF = -1.7976931348623157E308;
-    static final long maximoL = 2147483647;
-    static final long minimoL = -2147483648;
+    private static final double maximoF = 2.2250738585072014E-308;
+    private static final double minimoF = -1.7976931348623157E308;
+    private static final long maximoL = 2147483647;
+    private static final long minimoL = -2147483648;
 
 
     private TablaSimbolos tablaSimb;
@@ -29,8 +29,6 @@ public class CeldaAS extends CeldaABS{
     }
 
     public int ejecutar_celda(Token t) {
-        //si error es null es un estado final. Devuelvo -1 si es Final o -2 si es Error.
-        int warning;
 
         if  ( error == null ) {
             if (t != null){
