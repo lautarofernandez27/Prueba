@@ -52,7 +52,7 @@ public class CeldaAS extends CeldaABS{
                 //Si esta fuera de los limites, tambien lo trunco al maximo o minimo correspondiente.
                 //TODO: Si lo trunco no lo deberia agregar tmb a la tabla de simb. ?
 
-                if ( (t.getUso() == AnalizadorLexico.CTEF) {
+                if (t.getUso() == AnalizadorLexico.CTEF) {
                     t.setTipo("float");
                     String cadenaf = t.getNombre();
                     double valorf= Double.parseDouble(cadenaf);

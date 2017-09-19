@@ -4,6 +4,8 @@ public class MatrizTE {
 
     static final String error1 = "Error: caracter invalido";
     static final String error2  = "Error al declarar un identificador. Los caracteres validos son letras, digitos y _";
+    static final String error3 = "Error: olvido poner numero de exponente";
+    static final String error4 = "Se esperaba ' para terminar la cadena";
 
     static final int col=17;
     static final String compilacion= "Error de compilacion";
@@ -108,73 +110,105 @@ public class MatrizTE {
     }
     public void fila1(){
 
-
-
+        matTrans[1][0]= new Celda(1);
+        matTrans[1][1]= new Celda(1);
+        for(int i = 2; i<col; i++)
+            if ((i!= 4) && (i!= 11))
+                matTrans[1][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[1][i] = new Celda(1);
     }
     public void fila2(){
-
-
-
+        matTrans[2][0]= new Celda(2);
+        matTrans[2][1] = new CeldaAS(-1,tablaSimb);
+        matTrans[2][2]= new Celda(6);
+        for(int i = 3; i<col; i++)
+            matTrans[2][i] = new CeldaAS(-1,tablaSimb);
     }
     public void fila3(){
-
-
-
+        matTrans[3][0]= new Celda(6);
+        for(int i = 1; i<col; i++)
+            if (i!= 11)
+                matTrans[3][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[3][i] = new Celda(4);
     }
     public void fila4(){
-
-
-
+        matTrans[4][0]= new Celda(7);
+        for(int i = 1; i<col; i++)
+            if ((i!= 3) && (i!= 9))
+                matTrans[4][i] = new CeldaAS(-2,tablaSimb,new Error(error3,compilacion));
+            else
+                matTrans[4][i] = new Celda(5);
     }
     public void fila5(){
-
-
-
+        matTrans[5][0]= new Celda(7);
+        for(int i = 1; i<col; i++)
+            matTrans[5][i] = new CeldaAS(-2,tablaSimb,new Error(error3,compilacion));
     }
     public void fila6(){
-
-
-
+        matTrans[6][0]= new Celda(6);
+        for(int i = 1; i<col; i++)
+            if (i!= 11)
+                matTrans[6][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[6][i] = new Celda(4);
     }
     public void fila7(){
-
-
+        matTrans[7][0]= new Celda(7);
+        for(int i = 1; i<col; i++)
+            matTrans[7][i] = new CeldaAS(-1,tablaSimb);
 
     }
     public void fila8(){
 
-
+        for(int i = 0; i<col; i++)
+            if (i!= 7)
+                matTrans[8][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[8][i] = new Celda(9);
 
     }
     public void fila9(){
-
-
-
+        for(int i = 0; i<col; i++)
+            if ((i!= 12)&&(i!=13))
+                matTrans[9][i] = new Celda(9);
+        matTrans[9][12] = new CeldaAS(-1,tablaSimb);
+        matTrans[9][13] = new Celda(0);
     }
     public void fila10(){
-
-
-
+        for(int i = 0; i<col; i++)
+            if ((i!= 12)&&(i!=13)&&(i!=15))
+                matTrans[10][i] = new Celda(10);
+        matTrans[10][12] = new CeldaAS(-2,tablaSimb,new Error(error4,compilacion));
+        matTrans[10][13] = new CeldaAS(-2,tablaSimb,new Error(error4,compilacion));
+        matTrans[10][15] = new Celda(14);
     }
     public void fila11(){
-
-
-
+        for(int i = 0; i<col; i++)
+            if (i!= 8)
+                matTrans[11][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[11][i] = new Celda(14);
     }
     public void fila12(){
-
-
-
+        for(int i = 0; i<col; i++)
+            if ((i!= 8)&&(i!=5))
+                matTrans[12][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[12][i] = new Celda(14);
     }
     public void fila13(){
 
-
-
+        for(int i = 0; i<col; i++)
+            if (i!= 8)
+                matTrans[13][i] = new CeldaAS(-1,tablaSimb);
+            else
+                matTrans[13][i] = new Celda(14);
     }
     public void fila14(){
-
-
-
+        for(int i = 0; i<col; i++)
+                matTrans[14][i] = new CeldaAS(-1,tablaSimb);
     }
 
 }
