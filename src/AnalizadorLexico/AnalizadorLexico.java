@@ -75,7 +75,7 @@ public class AnalizadorLexico {
     private MatrizTE matTrans;
 
     //
-    private CeldaAbs celdaActual;
+    private CeldaABS celdaActual;
 
     public AnalizadorLexico( ControladorArchivo archivo, TablaSimbolos ts ) {
         //Contiene los estados de transicion
@@ -203,8 +203,8 @@ public class AnalizadorLexico {
             switch (valor){
                 case "if": return IF;
                 case "else": return ELSE;
-                case "endif": return ENDIF;
-                case "print": return PRINT;
+                case "end_if": return END_IF;
+                case "out": return OUT;
                 case "for": return FOR;
                 case "matrix": return MATRIX;
                 case "allow": return ALLOW;
