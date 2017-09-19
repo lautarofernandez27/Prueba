@@ -32,7 +32,7 @@ public class Token {
             lexema = "Cadena de caracteres";
         else
         if (uso==analizador.CTEL)
-            lexema = "Constante long";;
+            lexema = "Constante long";
         else
         if (uso==analizador.S_MAYOR_IGUAL)
             lexema = "Simbolo Mayor igual";
