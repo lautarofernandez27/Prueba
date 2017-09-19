@@ -47,7 +47,7 @@ public class CeldaAS extends CeldaABS{
                 //Se chequea el valor de la constante
                 //Si esta fuera de los limites, tambien lo trunco al maximo o minimo correspondiente.
 
-                if ( (t.getUso() == AnalizadorLexico.CTEF) {
+                if (t.getUso() == AnalizadorLexico.CTEF) {
                     t.setTipo("float");
                     String cadenaf = t.getNombre();
                     double valorf= Double.parseDouble(cadenaf);
