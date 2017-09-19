@@ -53,31 +53,31 @@ public class CeldaAS extends CeldaABS{
                     double valorf= Double.parseDouble(cadenaf);
                     t.setNombre(cadenaf);
                     if (valorf>maximoF){
-                        t.setNombre((String)maximoF);//Coloco el mayor valor aceptado por float
+                        t.setNombre(""+maximoF);//Coloco el mayor valor aceptado por float
                         if (!tablaSimb.existe(t.getNombre()))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
                     if (valorf<minimoF){
-                        t.setNombre((String)minimoF);//Coloco el minimo valor aceptado por float
+                        t.setNombre(""+minimoF);//Coloco el minimo valor aceptado por float
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
                 }
-                if(t.getUso() == AnalizadorLexico.CTEL) ) {
+                if(t.getUso() == AnalizadorLexico.CTEL) {
                     String cadenal = t.getNombre();
                     long valorl= Long.parseLong(cadenal);
                     t.setTipo("long");
                     t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
                     if (valorl>maximoL){
-                        t.setNombre((String)maximoL);
+                        t.setNombre(""+maximoL);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
                     if (valorl<minimoL){
-                        t.setNombre((String)minimoL);
+                        t.setNombre(""+minimoL);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
