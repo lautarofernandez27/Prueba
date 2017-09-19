@@ -1,4 +1,2 @@
-program 
-ijnvknfvlnjae
-
-akjvnjenvkf
+if facu then
+44 >= 28,44
