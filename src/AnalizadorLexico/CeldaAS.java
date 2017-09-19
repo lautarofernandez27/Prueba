@@ -1,19 +1,14 @@
 package AnalizadorLexico;
 
 public class CeldaAS extends CeldaABS{
-    static final String constanteI = "CI";
+    static final String constanteF = "CF";
     static final String identificador = "I";
     static final String constanteL = "CL";
 
-    public static final long maximo = 32767;
-    public static final long minimo = -32768;
+    public static final double maximoF = 2.2250738585072014E-308;
+    public static final double minimoF = -1.7976931348623157E308;
     static final long maximoL = 2147483647;
     static final long minimoL = -2147483648;
-
-    static final String Smaximo = "_i32767";
-    static final String Sminimo = "_i-32768";
-    static final String SmaximoL = "_l2147483647";
-    static final String SminimoL = "_l-2147483648";
 
 
     private TablaSimbolos tablaSimb;
@@ -44,9 +39,9 @@ public class CeldaAS extends CeldaABS{
             if (t != null){
                 //Se chequea si es un ID, si el nombre es >20 lo trunco.
                 //TODO: Deberia tener un warning o alfinal no?
-                if ((t.getNombre().length()>20) && (t.getUso()== AnalizadorLexico.ID) ){
+                if ((t.getNombre().length()>15) && (t.getUso()== AnalizadorLexico.ID) ){
                     String truncar=t.getNombre() ;
-                    t.setNombre( truncar.substring(0, 19) );
+                    t.setNombre( truncar.substring(0, 14) );
                     if (!tablaSimb.existe(t.getNombre() ))
                         tablaSimb.addSimbolo(t);
 
@@ -57,47 +52,38 @@ public class CeldaAS extends CeldaABS{
                 //Si esta fuera de los limites, tambien lo trunco al maximo o minimo correspondiente.
                 //TODO: Si lo trunco no lo deberia agregar tmb a la tabla de simb. ?
 
-                if ( (t.getUso() == AnalizadorLexico.CTEI) || (t.getUso() == AnalizadorLexico.CTEL) ) {
-                    String cadena = t.getNombre();
-
-                    if(t.getUso() == AnalizadorLexico.CTEI)
-                        t.setTipo("integer");
-                    else
-                        t.setTipo("long");
-
-                    //TODO:
-                    //Integer.parseInt() soporta hasta numeros de diez digitos, si se le da un string mas grande
-                    //se rompe !
-
-                    //int valor;
-                    //if(cadena.length()<=10)
-                    long valor = Long.parseLong(cadena.substring(2)); //Se extrae el valor despues de _i o _l
-                    t.setValor(valor);
-                    //else
-                    //valor = Integer.parseInt(cadena.substring(0,9));
-
-                    if ( (valor>maximo) && (t.getUso()== AnalizadorLexico.CTEI) ){
-                        t.setNombre(Smaximo);
-                        t.setValor(maximo);
+                if ( (t.getUso() == AnalizadorLexico.CTEF) {
+                    t.setTipo("float");
+                    String cadenaf = t.getNombre();
+                    double valorf= Double.parseDouble(cadenaf);
+                    t.setNombre((String)maximoF);
+                    t.setValor(valorf);
+                    if (valorf>maximoF){
+                        t.setValor(maximoF);  //Coloco el mayor valor aceptado por float
+                        if (!tablaSimb.existe(t.getNombre()))
+                            tablaSimb.addSimbolo(t);
+                        return -4;
+                    }
+                    if (valorf<minimoF){
+                        t.setValor(minimoF);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
-                    if ( (valor<minimo) && (t.getUso()== AnalizadorLexico.CTEI) ){
-                        t.setNombre(Sminimo);
-                        t.setValor(minimo);
-                        if (!tablaSimb.existe(t.getNombre() ))
-                            tablaSimb.addSimbolo(t);
-                        return -4;
-                    }
-                    if ( (valor>maximoL) && (t.getUso()== AnalizadorLexico.CTEL) ){
+                }
+                if(t.getUso() == AnalizadorLexico.CTEL) ) {
+                    String cadenal = t.getNombre();
+                    long valorl= Long.parseLong(cadenal);
+                    t.setTipo("long");
+                    t.setValor(valorl);
+                    if (valorl>maximoL){
                         t.setNombre(SmaximoL);
                         t.setValor(maximoL);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
-                    if ( (valor<minimoL) && (t.getUso()== AnalizadorLexico.CTEL) ){
+                    if ( (valorl<minimoL) && (t.getUso()== AnalizadorLexico.CTEL) ){
                         t.setNombre(SminimoL);
                         t.setValor(minimoL);
                         if (!tablaSimb.existe(t.getNombre() ))

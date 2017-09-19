@@ -16,7 +16,7 @@ public class AnalizadorLexico {
     static final String identificador = "I";
 
     public static final String constanteL = "constante long";
-    public static final String variableL = "longint";
+    public static final String variableL = "long";
 
     //Constantes para YACC
     public static final int ID = 257;
