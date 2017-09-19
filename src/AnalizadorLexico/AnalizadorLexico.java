@@ -98,10 +98,9 @@ public class AnalizadorLexico {
     public void agregarTokens(){
 
         id_tokens.put(1, ID);
-        id_tokens.put(14, COMENTARIO);	//COMENTARIO VACIO
-        id_tokens.put(17, COMENTARIO);
-        id_tokens.put(21, CTEF);
-        id_tokens.put(22, CTEL);
+        id_tokens.put(6, CTEF);
+        id_tokens.put(7, CTEF);
+        id_tokens.put(2, CTEL);
     }
 
     public int sigToken(){
@@ -157,7 +156,7 @@ public class AnalizadorLexico {
     }
 
 
-    public Token yylex(){
+    /*public Token yylex(){
 
         sigToken();
 
@@ -196,32 +195,34 @@ public class AnalizadorLexico {
 
             return yylex(); //token.calcularToken();
         }
-    }
+    }*/
 
     private Integer calcularUso(int estado, String valor){
         if (estado == 1){
             switch (valor){
                 case "if": return IF;
+                case "then": return THEN;
                 case "else": return ELSE;
                 case "end_if": return END_IF;
                 case "out": return OUT;
-                case "for": return FOR;
-                case "matrix": return MATRIX;
-                case "allow": return ALLOW;
-                case "to": return TO;
-                case "integer": return INTEGER;
+                case "float": return FLOAT;
                 case "longint": return LONGINT;
+                case "begin": return BEGIN;
+                case "end": return END;
+                case "while": return WHILE;
+                case "do": return DO;
+                case "let": return LET;
                 default: return ID;
             }
         }
 
-        if(estado == 20){
+        if(estado == 14){
             if(valor.length()>1){
-                if(valor.equals("--"))
-                    return AnalizadorLexico.S_RESTA_RESTA;
+                if(valor.equals("=="))
+                    return AnalizadorLexico.S_IGUAL_IGUAL;
                 else
-                if(valor.equals(":="))
-                    return AnalizadorLexico.S_ASIGNACION;
+                if(valor.equals("<>"))
+                    return AnalizadorLexico.S_DESIGUAL;
                 else
                 if(valor.equals(">="))
                     return AnalizadorLexico.S_MAYOR_IGUAL;
@@ -229,11 +230,8 @@ public class AnalizadorLexico {
                 if(valor.equals("<="))
                     return AnalizadorLexico.S_MENOR_IGUAL;
                 else
-                if(valor.equals("!="))
-                    return AnalizadorLexico.S_EXCLAMACION_IGUAL;
-                else
-                if(valor.charAt(0)=='"' && valor.charAt(valor.length()-1)=='"')	//Un comentario
-                    return AnalizadorLexico.MULTI_LINEA;
+                if(valor.charAt(0)=='\'' && valor.charAt(valor.length()-1)=='\'')
+                    return AnalizadorLexico.CADENA;
             }
         }
         if (id_tokens.containsKey(estado))
