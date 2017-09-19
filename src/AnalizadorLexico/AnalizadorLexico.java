@@ -26,20 +26,22 @@ public class AnalizadorLexico {
     public static final int S_MENOR_IGUAL = 261;
     static final int S_DESIGUAL = 262;	//<>
     public static final int CTEF = 263;
-    static final int COMENTARIO = 264;
+    public static final int COMENTARIO = 264;
+    public static final int CADENA = 265;
 
     //PALABRA RESERVADA
-    static final int IF = 265;
-    static final int THEN = 266;
-    static final int ELSE = 267;
-    static final int END_IF = 268;
-    public static final int OUT = 269;
-    static final int BEGIN = 270;
-    static final int END = 271;
-    static final int WHILE = 272;
-    static final int DO = 273;
-    static final int LET = 274;
-    static final int LONGINT = 275;
+    static final int IF = 266;
+    static final int THEN = 267;
+    static final int ELSE = 268;
+    static final int END_IF = 269;
+    public static final int OUT = 270;
+    static final int BEGIN = 271;
+    static final int END = 272;
+    static final int WHILE = 273;
+    static final int DO = 274;
+    static final int LET = 275;
+    static final int FLOAT = 276;
+    static final int LONGINT = 277;
 
     static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
     static final String warningC = "Warning: Constante fuera de rango. La constante toma el valor minimo o maximo dependiendo su signo";

@@ -5,11 +5,8 @@ import java.util.Hashtable;
 public class Token {
     //Nombre del token dentro del codigo
     String nombre;
-
-    //Valor del token, p.e. _i453; valor = 453.
-    long valorLong;
-
     //integer, longint
+
     String tipo="";
 
     //ID, CTE
@@ -31,14 +28,11 @@ public class Token {
         if (uso==analizador.ID)
             lexema = "Identificador";
         else
-        if (uso==analizador.MULTI_LINEA)
+        if (uso==analizador.CADENA)
             lexema = "Cadena de caracteres";
         else
         if (uso==analizador.CTEL)
-            lexema = "Constante long";
-        else
-        if (uso==analizador.S_ASIGNACION)
-            lexema = "Asignacion";
+            lexema = "Constante long";;
         else
         if (uso==analizador.S_MAYOR_IGUAL)
             lexema = "Simbolo Mayor igual";
@@ -46,40 +40,20 @@ public class Token {
         if (uso==analizador.S_MENOR_IGUAL)
             lexema = "Simbolo Menor igual";
         else
-        if (uso==analizador.S_EXCLAMACION_IGUAL)
+        if (uso==analizador.S_DESIGUAL)
             lexema = "Simbolo distinto";
         else
-        if (uso==analizador.CTEI)
-            lexema = "Constante entera";
+        if (uso==analizador.CTEF)
+            lexema = "Constante flotante";
         else
-        if (uso==analizador.S_RESTA_RESTA)
-            lexema = "Simbolo --";
-        else
-        if (uso==analizador.CTEI)
-            lexema = "Constante entera";
+        if (uso==analizador.S_IGUAL_IGUAL)
+            lexema = "Simbolo ==";
         else
         if (uso==analizador.COMENTARIO)
             lexema = "Comentario";
         else
-        if (uso==analizador.ANOTACIONF)
-            lexema = "Anotacion por filas";
-        else
-        if (uso==analizador.ANOTACIONC)
-            lexema = "Anotacion por columnas";
-        else
             lexema = "Simbolo";
-
     }
-
-    public Token(String numeroTercetoString) {
-        // Usado para los tercetos
-        nombre = numeroTercetoString;
-    }
-
-    public long getValor(){
-        return valorLong;
-    }
-
 
     public int getUso() {
         return uso;
@@ -93,12 +67,8 @@ public class Token {
         this.tipo = tipo;
     }
 
-    public void setValor(long valor) {
-        this.valorLong = valor;
-    }
-
     public String imprimirToken(){
-        String imprimir = lexema + ": " + nombre +" " + tipo + " " + valorLong + " [" +uso + "] ";
+        String imprimir = lexema + ": " + nombre +" " + tipo + " [" +uso + "] ";
         return imprimir;
     }
 

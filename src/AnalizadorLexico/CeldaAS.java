@@ -1,9 +1,6 @@
 package AnalizadorLexico;
 
 public class CeldaAS extends CeldaABS{
-    static final String constanteF = "CF";
-    static final String identificador = "I";
-    static final String constanteL = "CL";
 
     public static final double maximoF = 2.2250738585072014E-308;
     public static final double minimoF = -1.7976931348623157E308;
@@ -38,7 +35,6 @@ public class CeldaAS extends CeldaABS{
         if  ( error == null ) {
             if (t != null){
                 //Se chequea si es un ID, si el nombre es >20 lo trunco.
-                //TODO: Deberia tener un warning o alfinal no?
                 if ((t.getNombre().length()>15) && (t.getUso()== AnalizadorLexico.ID) ){
                     String truncar=t.getNombre() ;
                     t.setNombre( truncar.substring(0, 14) );
@@ -50,22 +46,20 @@ public class CeldaAS extends CeldaABS{
 
                 //Se chequea el valor de la constante
                 //Si esta fuera de los limites, tambien lo trunco al maximo o minimo correspondiente.
-                //TODO: Si lo trunco no lo deberia agregar tmb a la tabla de simb. ?
 
                 if ( (t.getUso() == AnalizadorLexico.CTEF) {
                     t.setTipo("float");
                     String cadenaf = t.getNombre();
                     double valorf= Double.parseDouble(cadenaf);
-                    t.setNombre((String)maximoF);
-                    t.setValor(valorf);
+                    t.setNombre(cadenaf);
                     if (valorf>maximoF){
-                        t.setValor(maximoF);  //Coloco el mayor valor aceptado por float
+                        t.setNombre((String)maximoF);//Coloco el mayor valor aceptado por float
                         if (!tablaSimb.existe(t.getNombre()))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
                     if (valorf<minimoF){
-                        t.setValor(minimoF);
+                        t.setNombre((String)minimoF);//Coloco el mayor valor aceptado por float
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
@@ -75,17 +69,15 @@ public class CeldaAS extends CeldaABS{
                     String cadenal = t.getNombre();
                     long valorl= Long.parseLong(cadenal);
                     t.setTipo("long");
-                    t.setValor(valorl);
+                    t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
                     if (valorl>maximoL){
-                        t.setNombre(SmaximoL);
-                        t.setValor(maximoL);
+                        t.setNombre((String)maximoL);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
                     }
-                    if ( (valorl<minimoL) && (t.getUso()== AnalizadorLexico.CTEL) ){
-                        t.setNombre(SminimoL);
-                        t.setValor(minimoL);
+                    if (valorl<minimoL){
+                        t.setNombre((String)minimoL);
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
@@ -96,8 +88,6 @@ public class CeldaAS extends CeldaABS{
                 if(tablaSimb.es_Agregable(t))
                     tablaSimb.addSimbolo(t);
 
-
-                //Si es una palabra reservada la tengo que devolver de alguna tabla
                 return -1;
             }
             return -1;
