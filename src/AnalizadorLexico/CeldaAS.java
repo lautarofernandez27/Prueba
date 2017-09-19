@@ -59,7 +59,7 @@ public class CeldaAS extends CeldaABS{
                         return -4;
                     }
                     if (valorf<minimoF){
-                        t.setNombre((String)minimoF);//Coloco el mayor valor aceptado por float
+                        t.setNombre((String)minimoF);//Coloco el minimo valor aceptado por float
                         if (!tablaSimb.existe(t.getNombre() ))
                             tablaSimb.addSimbolo(t);
                         return -4;
