@@ -46,9 +46,9 @@ public class Main {
     }
     public static void main (String [] args){
 
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\TP1_7.txt");
+        //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\TP1_7.txt");
 
-        //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
+        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\TP1_1.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG17\n");
