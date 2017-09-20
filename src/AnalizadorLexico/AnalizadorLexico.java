@@ -179,7 +179,7 @@ public class AnalizadorLexico {
             tokens.add(token);
             celdaActual.ejecutar_celda(token);
             archivo.avanzar();
-            return yylex(); //token.calcularToken();
+            return yylex();
         }
     }
 

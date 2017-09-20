@@ -29,7 +29,104 @@ import AnalizadorSintactico.*;
 %}
 
 
-asignacion: ID '=' ID
+programa  :   bloque_sentencias
+           ;
+
+
+bloque_sentencias  :   bloque_sentencias sentencia
+                    |  sentencia
+                    ;
+
+
+sentencia   : declaracion '.'
+            | ejecucion  '.'
+            ;
+
+
+declaracion  :  lista_variables ':' tipo
+             ;
+
+
+lista_variables  :  lista_variables ',' ID
+                 |  ID
+                 ;
+
+
+tipo :  LONG
+     |  FLOAT
+     ;
+
+
+
+ejecucion : control
+          | seleccion
+          | asignacion
+          | out
+          | let
+          ;
+
+
+
+asignacion  :  ID  '=' expresion
+            ;
+
+
+
+expresion  :  expresion '+'   termino
+           |  expresion '-'   termino
+           |  termino
+           ;
+
+termino  :  termino '*'  factor
+         |  termino '/'  factor
+         |  factor
+         ;
+
+factor   :  CTEF
+         |  CTEL
+         |  ID
+         ;
+
+out  :    OUT '('   CADENA   ')'
+     ;
+
+let  :    LET  asignacion  '.'
+
+
+seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_if  END_IF
+           |   IF '(' condicion  ')' THEN   bloque_sentencias_if  ELSE bloque_sentencias_if  END_IF
+
+
+bloque_sentencias_if  :   BEGIN   bloque_sentencias     END
+                      |  sentencia
+                      ;
+
+bloque_sentencias_do  :  BEGIN sentencias_do END
+                      | ejecucion
+                      ;
+
+sentencias_do   :   sentencias_do ejecucion
+                |  ejecucion
+                ;
+
+
+
+control    :   WHILE '(' condicion ')' DO bloque_sentencias_do
+           ;
+
+
+
+condicion   :   expresion   comparador   expresion
+            ;
+
+
+comparador   :   '<'
+             |   '>'
+             |   S_IGUAL_IGUAL
+             |   S_MAYOR_IGUAL
+             |   S_MENOR_IGUAL
+             |   S_DESIGUAL
+             ;
 
 
 %%
