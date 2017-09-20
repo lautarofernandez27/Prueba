@@ -1,2 +1,3 @@
-if facu then
-44 >= 28,44
+if facu then 'hola soy laucha'
+long:a.
+a=2147483648.
