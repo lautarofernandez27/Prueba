@@ -204,18 +204,18 @@ public class AnalizadorLexico {
     private Integer calcularUso(int estado, String valor){
         if (estado == 1){
             switch (valor){
-                case "if": return IF;
-                case "then": return THEN;
-                case "else": return ELSE;
-                case "end_if": return END_IF;
-                case "out": return OUT;
-                case "float": return FLOAT;
-                case "long": return LONG;
-                case "begin": return BEGIN;
-                case "end": return END;
-                case "while": return WHILE;
-                case "do": return DO;
-                case "let": return LET;
+                case "IF": return IF;
+                case "THEN": return THEN;
+                case "ELSE": return ELSE;
+                case "END_IF": return END_IF;
+                case "OUT": return OUT;
+                case "FLOAT": return FLOAT;
+                case "LONG": return LONG;
+                case "BEGIN": return BEGIN;
+                case "END": return END;
+                case "WHILE": return WHILE;
+                case "DO": return DO;
+                case "LET": return LET;
                 default: return ID;
             }
         }
