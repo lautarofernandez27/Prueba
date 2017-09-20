@@ -46,9 +46,9 @@ public class Main {
     }
     public static void main (String [] args){
 
-        //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\TP1_7.txt");
+        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\TP1_6.txt");
 
-        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\TP1_1.txt");
+        //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\TP1_1.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG17\n");
@@ -60,7 +60,6 @@ public class Main {
         ControladorArchivo archivo =new ControladorArchivo( codigo );
         TablaSimbolos ts = new TablaSimbolos();
         AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivo,ts);
-        analizadorLexico.consumirToken();
 
         System.out.print(analizadorLexico.mostrarTokens());
         System.out.println( analizadorLexico.mostrarTs() );

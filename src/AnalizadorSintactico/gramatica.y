@@ -41,3 +41,24 @@ ControladorArchivo controladorArchivo;
 public void setLexico(AnalizadorLexico al) {
        analizadorL = al;
 }
+public void setSintactico (AnalizadorSintactico as){
+	analizadorS = as;
+}
+
+public void setTS (TablaSimbolos ts){
+	tablaSimbolo = ts;
+}
+
+int yylex()
+{
+	Token token = ((Token)(analizadorL).yylex());
+   	int val = token.getUso();
+   	yylval = new ParserVal(token);
+    return val;
+}
+
+
+void yyerror(String s) {
+	if(s.contains("under"))
+		System.out.println("par:"+s);
+}

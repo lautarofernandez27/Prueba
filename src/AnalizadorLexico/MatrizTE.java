@@ -6,6 +6,7 @@ public class MatrizTE {
     static final String error2  = "Error al declarar un identificador. Los caracteres validos son letras, digitos y _";
     static final String error3 = "Error: olvido poner numero de exponente";
     static final String error4 = "Se esperaba ' para terminar la cadena";
+    static final String error5 = "Los identificadores deben comenzar con letras";
 
     static final int col=17;
     static final String compilacion= "Error de compilacion";
@@ -77,6 +78,7 @@ public class MatrizTE {
         fila12();
         fila13();
         fila14();
+        fila15();
     }
 
     public CeldaABS getCelda(int fila, int col) {
@@ -94,7 +96,7 @@ public class MatrizTE {
         matTrans[0][1]= new Celda(1);
         matTrans[0][2]= new Celda(3);
         matTrans[0][3]= new Celda(14);
-        matTrans[0][4]= new CeldaAS(-2,tablaSimb,new Error(error1, compilacion));
+        matTrans[0][4]= new Celda(15);
         matTrans[0][5]= new Celda(13);
         matTrans[0][6]= new Celda(12);
         matTrans[0][7]= new Celda(8);
@@ -120,7 +122,7 @@ public class MatrizTE {
     }
     public void fila2(){
         matTrans[2][0]= new Celda(2);
-        matTrans[2][1] = new CeldaAS(-1,tablaSimb);
+        matTrans[2][1] = new Celda(15);
         matTrans[2][2]= new Celda(6);
         for(int i = 3; i<col; i++)
             matTrans[2][i] = new CeldaAS(-1,tablaSimb);
@@ -209,6 +211,13 @@ public class MatrizTE {
     public void fila14(){
         for(int i = 0; i<col; i++)
                 matTrans[14][i] = new CeldaAS(-1,tablaSimb);
+    }
+    public void fila15(){
+        for (int i=0; i<col; i++)
+            if ((i!=0)&&(i!=1)&&(i!=4))
+                matTrans[15][i] = new CeldaAS(-2,tablaSimb,new Error(error5,compilacion));
+            else
+                matTrans[15][i] = new Celda(15);
     }
 
 }

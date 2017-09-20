@@ -155,12 +155,11 @@ public class AnalizadorLexico {
             erroresWarning.add( new Error(warningI, "WI", lineaActual) );
         if (estadoActual == WC)
             erroresWarning.add( new Error(warningC, "WC", lineaActual) );
-        tokens.add(new Token( token_buffer.toString(), calcularUso(estadoAnterior,token_buffer.toString()) ) );
         return estadoAnterior;
     }
 
 
-    /*public Token yylex(){
+    public Token yylex(){
 
         sigToken();
 
@@ -199,7 +198,7 @@ public class AnalizadorLexico {
 
             return yylex(); //token.calcularToken();
         }
-    }*/
+    }
 
     private Integer calcularUso(int estado, String valor){
         if (estado == 1){

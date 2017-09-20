@@ -17,7 +17,7 @@ public class TablaSimbolos {
     }
 
     public void addSimbolo( Token t){
-        tSimb.put(t.getNombre(), t);
+        tSimb.put(t.getNombre().toLowerCase(), t);
     }
 
     public void addUso(String var, String uso){
