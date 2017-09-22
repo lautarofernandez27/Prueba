@@ -26,6 +26,7 @@
 package AnalizadorSintactico;
 import AnalizadorLexico.*;
 import AnalizadorSintactico.*;
+import AnalizadorLexico.Error;
 %}
 
 
@@ -43,7 +44,10 @@ sentencia   : declaracion '.'
             ;
 
 
-declaracion  :  lista_variables ':' tipo
+declaracion  :  lista_variables ':' tipo    {
+                                               analizadorS.addEstructura (new Error ( analizadorS.estructuraDECLARACION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea()  ));
+
+}
              ;
 
 
@@ -67,7 +71,11 @@ ejecucion : control
 
 
 
-asignacion  :  ID  '=' expresion
+asignacion  :  ID  '=' expresion {
+                                  analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+
+
+}
             ;
 
 
@@ -87,36 +95,52 @@ factor   :  CTEF
          |  ID
          ;
 
-out  :    OUT '('   CADENA   ')'
+out  :    OUT '('   CADENA   ')'    {
+                                      analizadorS.addEstructura (new Error ( analizadorS.estructuraOUT,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+
+}
      ;
 
-let  :    LET  asignacion  '.'
+let  :    LET  asignacion  '.'  {
+                                  analizadorS.addEstructura (new Error ( analizadorS.estructuraLET,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
+}
 
-seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_if  END_IF
-           |   IF '(' condicion  ')' THEN   bloque_sentencias_if  ELSE bloque_sentencias_if  END_IF
+;
+seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_if  END_IF   {
+                                                                             analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
+}
+           |   IF '(' condicion  ')' THEN   bloque_sentencias_if  ELSE bloque_sentencias_if  END_IF    {
+                                                                             analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-bloque_sentencias_if  :   BEGIN   bloque_sentencias     END
+           }
+;
+
+bloque_sentencias_if  :   BEGIN   bloque_sentencias   END'.'
                       |  sentencia
                       ;
 
 bloque_sentencias_do  :  BEGIN sentencias_do END
-                      | ejecucion
+                      | ejecucion '.'
                       ;
 
-sentencias_do   :   sentencias_do ejecucion
-                |  ejecucion
+sentencias_do   :   sentencias_do ejecucion '.'
+                |  ejecucion '.'
                 ;
 
 
+control    :   WHILE '(' condicion ')' DO bloque_sentencias_do   {
+                                                                   analizadorS.addEstructura (new Error ( analizadorS.estructuraWHILE,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-control    :   WHILE '(' condicion ')' DO bloque_sentencias_do
+}
            ;
 
 
+condicion   :   expresion   comparador   expresion     {
+                                                        analizadorS.addEstructura (new Error ( analizadorS.estructuraCONDICION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-condicion   :   expresion   comparador   expresion
+}
             ;
 
 
@@ -140,6 +164,11 @@ public void setLexico(AnalizadorLexico al) {
 }
 public void setSintactico (AnalizadorSintactico as){
 	analizadorS = as;
+}
+
+
+public void setControladorArchivo ( ControladorArchivo ca){
+	controladorArchivo = ca;
 }
 
 public void setTS (TablaSimbolos ts){

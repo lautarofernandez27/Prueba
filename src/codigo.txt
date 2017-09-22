@@ -1,3 +1,7 @@
-if If IF Facu facu then 'hola soy laucha'
-long:a.
-a=2147483648.
+a:FLOAT.
+IF (a+5*6==4+facu) THEN
+BEGIN
+a=4.
+b=2.
+END.
+END_IF.

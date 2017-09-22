@@ -13,6 +13,8 @@ import java.io.Reader;
 import AnalizadorLexico.AnalizadorLexico;
 import AnalizadorLexico.ControladorArchivo;
 import AnalizadorLexico.TablaSimbolos;
+import AnalizadorSintactico.AnalizadorSintactico;
+import AnalizadorSintactico.Parser;
 
 
 public class Main {
@@ -46,7 +48,7 @@ public class Main {
     }
     public static void main (String [] args){
 
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\TP1_6.txt");
+        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
         //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\TP1_1.txt");
 
@@ -60,10 +62,23 @@ public class Main {
         ControladorArchivo archivo =new ControladorArchivo( codigo );
         TablaSimbolos ts = new TablaSimbolos();
         AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivo,ts);
+        AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico();
+
+
+        Parser parser;
+        parser = new Parser();
+        parser.setLexico(analizadorLexico);
+        parser.setTS(ts);
+        parser.setSintactico(analizadorSintactico);
+        parser.setControladorArchivo(archivo);
+        parser.run();
+
 
         System.out.print(analizadorLexico.mostrarTokens());
         System.out.println( analizadorLexico.mostrarTs() );
         System.out.println(analizadorLexico.mostrarWarning());
         System.out.println(analizadorLexico.mostrarErrorComp());
+        System.out.println(analizadorSintactico.getErroresSint());
+        System.out.println(analizadorSintactico.getEstructuras());
     }
 }
