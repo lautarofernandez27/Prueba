@@ -122,7 +122,7 @@ bloque_sentencias_if  :   BEGIN   bloque_sentencias   END'.'
                       ;
 
 bloque_sentencias_do  :  BEGIN sentencias_do END
-                      | ejecucion '.'
+                      | ejecucion
                       ;
 
 sentencias_do   :   sentencias_do ejecucion '.'
