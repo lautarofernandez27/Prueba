@@ -176,7 +176,7 @@ public class MatrizTE {
             if ((i!= 12)&&(i!=13))
                 matTrans[9][i] = new Celda(9);
         matTrans[9][12] = new CeldaAS(-1,tablaSimb);
-        matTrans[9][13] = new Celda(0);
+        matTrans[9][13] = new Celda(16);
     }
     public void fila10(){
         for(int i = 0; i<col; i++)

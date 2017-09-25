@@ -107,30 +107,50 @@ let  :    LET  asignacion  '.'  {
 }
 
 ;
-seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_if  END_IF   {
+seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF   {
                                                                              analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
 }
-           |   IF '(' condicion  ')' THEN   bloque_sentencias_if  ELSE bloque_sentencias_if  END_IF    {
+           |   IF '(' condicion  ')'   bloque_sentencias_control  END_IF   {
+                                                                                         analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
+           |   IF '(' condicion  ')' THEN   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF    {
                                                                              analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
            }
+           |   IF '(' condicion  ')'   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF    {
+                                                                             analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+           }
+           |   IF condicion ')' THEN bloque_sentencias_control  END_IF   {
+                                                                            analizadorS.addError (new Error ( analizadorS.errorParentesisA,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+}
+           |   IF '(' condicion THEN bloque_sentencias_control  END_IF   {
+                                                                                       analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+           }
+           |   IF condicion ')' THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF   {
+                                                                                       analizadorS.addError (new Error ( analizadorS.errorParentesisA,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+           }
+           |   IF '(' condicion THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF   {
+                                                                                                  analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+           }
 ;
 
-bloque_sentencias_if  :   BEGIN   bloque_sentencias   END'.'
-                      |  sentencia
-                      ;
-
-bloque_sentencias_do  :  BEGIN sentencias_do END
-                      | ejecucion
-                      ;
-
-sentencias_do   :   sentencias_do ejecucion '.'
-                |  ejecucion '.'
-                ;
+bloque_sentencias_control  :   BEGIN   sentencias_control   END '.'
+                           |  ejecucion '.'
+                           ;
 
 
-control    :   WHILE '(' condicion ')' DO bloque_sentencias_do   {
+
+sentencias_control  :  sentencias_control ejecucion '.'
+                    |  ejecucion '.'
+                    ;
+
+
+
+
+control    :   WHILE '(' condicion ')' DO bloque_sentencias_control   {
                                                                    analizadorS.addEstructura (new Error ( analizadorS.estructuraWHILE,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
 }

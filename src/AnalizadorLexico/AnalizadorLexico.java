@@ -125,6 +125,15 @@ public class AnalizadorLexico {
             return estadoAnterior;
 
         while  (estadoActual != F && estadoActual != E)  {
+            if (estadoActual== 16) {
+                token_buffer.delete(0, token_buffer.length());
+                estadoActual = 0;
+                estadoAnterior = 0;
+                while ( (archivo.getActual() == ' ' ) || (archivo.getActual() == '	'  ) || (archivo.getActual() == '\n' ))
+                    archivo.avanzar();
+                if(archivo.finArchivo())
+                    return estadoAnterior;
+            }
             //Almaceno el ultimo caracter que leo
             ultimoChar = archivo.getActual();
 

@@ -24,8 +24,8 @@ public class AnalizadorSintactico {
     //descripciones errores sintacticos
     static final String errorOUT1 = "Existe un error en la sentencia OUT ";
     static final String errorOUT2 = "Se espera la palabra reservada 'OUT' al comienzo de la sentencia ";
-    static final String errorParentesisA = "Parentesis no equilibrados. Falto abrir parentesis. ";
-    static final String errorParentesisB = "Parentesis no equilibrados. Falto cerrar parentesis. ";
+    static final String errorParentesisA = "Falto abrir parentesis. ";
+    static final String errorParentesisB = "Falto cerrar parentesis. ";
     static final String errorCondicionI = "No se reconoce el lado izquierdo de la condicion ";
     static final String errorCondicionD = "No se reconoce el lado derecho de la condicion ";
     static final String errorPuntoFinal = "Se espera un '.' al final de la sentencia ";
@@ -35,7 +35,8 @@ public class AnalizadorSintactico {
     static final String errorSimboloAsignacion = "La asignacion es con =";
     static final String errorPalabraWHILE = "Se esperaba la palabra WHILE en mayuscula ";
     static final String errorTipo_operacion = "Los tipos de las variables son incompatibles.";
-    static final String errorPalabraIF = "Se esperaba la palabra if en mayuscula";
+    static final String errorPalabraIF = "Se esperaba la palabra IF";
+    static final String faltaThen = "Se esperaba la palabra THEN";
 
 
     ArrayList<Error> erroresSint;
