@@ -41,8 +41,6 @@ public class AnalizadorSintactico {
 
     ArrayList<Error> erroresSint;
     ArrayList<Error > estructuras;
-    AnalizadorLexico analizadorL;
-    TablaSimbolos tablaS;
 
     public AnalizadorSintactico() {
         erroresSint = new ArrayList<Error>();

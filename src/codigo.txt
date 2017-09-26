@@ -1,8 +1,8 @@
-a:FLOAT.
+a:FLOAT
 IF (a+5*6==4+facu) THEN
     BEGIN
-        **a=4.
         a=4.
+        a=4
         IF (a==5) THEN
             BEGIN
                 a=6.
