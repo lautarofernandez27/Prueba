@@ -76,9 +76,7 @@ ejecucion : control
 
 asignacion  :  ID  '=' expresion '.'{
                                   analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
-
-
-}
+            }
             ;
 
 
@@ -101,6 +99,9 @@ factor   :  CTEF
 out  :    OUT '('   CADENA   ')'  '.'  {
                                       analizadorS.addEstructura (new Error ( analizadorS.estructuraOUT,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
+    }
+    |   OUT '(' CADENA ')'  error{
+                        analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
     }
     |   OUT CADENA ')'  '.'{
                         analizadorS.addError (new Error ( analizadorS.errorOUT1,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
@@ -127,7 +128,7 @@ seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF  '
 
             }
            |   IF '(' condicion  ')'   bloque_sentencias_control  END_IF   '.'{
-                                                                                         analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+                                                                               analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
             }
            |   IF '(' condicion  ')' THEN   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF    '.'{
@@ -153,6 +154,14 @@ seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF  '
 ;
 
 bloque_sentencias_control  :   BEGIN   sentencias_control   END '.'
+                           |   BEGIN   sentencias_control  '.' {
+                                                                    analizadorS.addError (new Error ( analizadorS.errorEND,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+
+                           }
+                           |   sentencias_control  END  '.' {
+                                                                    analizadorS.addError (new Error ( analizadorS.errorBEGIN,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+
+                           }
                            |  ejecucion
                            ;
 
@@ -165,17 +174,37 @@ sentencias_control  :  sentencias_control ejecucion
 
 
 
-control    :   WHILE '(' condicion ')' DO bloque_sentencias_control  '.' {
+control    :   WHILE '(' condicion ')' DO bloque_sentencias_control '.' {
                                                                    analizadorS.addEstructura (new Error ( analizadorS.estructuraWHILE,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-}
+            }
+            | WHILE '(' condicion DO bloque_sentencias_control  '.' {
+                                                                         analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
+            | WHILE condicion ')' DO bloque_sentencias_control  '.' {
+                                                                         analizadorS.addError (new Error ( analizadorS.errorParentesisA,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
+            | WHILE '(' condicion ')' bloque_sentencias_control  '.' {
+                                                                         analizadorS.addError (new Error ( analizadorS.faltaDO,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
            ;
 
 
 condicion   :   expresion   comparador   expresion     {
                                                         analizadorS.addEstructura (new Error ( analizadorS.estructuraCONDICION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-}
+            }
+            |   expresion   comparador     {
+                                            analizadorS.addError (new Error ( analizadorS.errorCondicionD,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
+            |  comparador  expresion   {
+                                        analizadorS.addError (new Error ( analizadorS.errorCondicionI,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+            }
             ;
 
 

@@ -37,6 +37,9 @@ public class AnalizadorSintactico {
     static final String errorTipo_operacion = "Los tipos de las variables son incompatibles.";
     static final String errorPalabraIF = "Se esperaba la palabra IF";
     static final String faltaThen = "Se esperaba la palabra THEN";
+    static final String faltaDO = "Se esperaba la palabra DO";
+    static final String errorEND = "No se coloco END para finalizar el bloque de sentencias";
+    static final String errorBEGIN = "No se coloco BEGIN para iniciar el bloque de sentencias";
 
 
     ArrayList<Error> erroresSint;
