@@ -144,9 +144,7 @@ public class AnalizadorLexico {
             celdaActual = matTrans.getCelda(estadoActual, matTrans.getColumna(new Character (ultimoChar) ) );
 
             estadoAnterior = estadoActual;
-
             estadoActual = celdaActual.ejecutar_celda(null);
-
 
             if (estadoActual == E){
                 //Hay error.

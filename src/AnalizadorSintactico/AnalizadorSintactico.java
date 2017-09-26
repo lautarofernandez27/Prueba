@@ -19,7 +19,7 @@ public class AnalizadorSintactico {
     static final String estructuraDECLARACION = "Sentencia de declaracion de variables.";
     static final String estructuraLET = "Sentencia de LET";
     static final String estructuraCONVERSION = "Sentencia de CONVERSION ";
-
+    static final String estructuraASIGnegativo = "Sentencia de ASIGNACION negativa ";
 
     //descripciones errores sintacticos
     static final String errorOUT1 = "Existe un error en la sentencia OUT ";
