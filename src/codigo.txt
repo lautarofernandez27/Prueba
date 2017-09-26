@@ -1,3 +1,15 @@
-a=4.
-OUT('jajaja')
-a=4.
+a:FLOAT
+IF (a+5*6==4+facu) THEN
+    BEGIN
+        a=4.
+        a=4
+        IF (a==5) THEN
+            BEGIN
+                a=6.
+
+            END.
+        END_IF.
+        b=2.
+    END.
+END_IF.
+**holis
