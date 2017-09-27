@@ -8,7 +8,6 @@ public class AnalizadorLexico {
     static final int F = -1;  //F Es la constante que indica un estado final !
     static final int E = -2;  //E Es la constante que indica un estado de error !
     static final int WI = -3; //WI Es la constante que indica un Warning de identificador
-    static final int WC = -4; //WC Es la constante que indica un Warning de constante
 
     public static final String constanteF = "constante flotante";
     public static final String variableF = "float";
@@ -160,8 +159,6 @@ public class AnalizadorLexico {
         estadoActual = celdaActual.ejecutar_celda(new Token( token_buffer.toString(), calcularUso(estadoAnterior,token_buffer.toString()) ) );
         if (estadoActual == WI)
             erroresWarning.add( new Error(warningI, "WI", lineaActual) );
-        if (estadoActual == WC)
-            erroresWarning.add( new Error(warningC, "WC", lineaActual) );
         return estadoAnterior;
     }
 

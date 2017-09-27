@@ -71,20 +71,21 @@ tipo :  LONG
 ejecucion : control
           | seleccion
           | asignacion
-          | asignacion_sin_punto  { analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea()));}
           | out
           | let
+          | asignacion_sin_punto  { analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea()));
+          }
+
           ;
 
 
 
-asignacion_sin_punto  :  ID  '=' expresion
-            ;
+asignacion_sin_punto  :  ID  '=' expresion{
+                                          analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+                        }
+                        ;
 
-asignacion  : asignacion_sin_punto '.'{                      analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
-
-
-}
+asignacion  : asignacion_sin_punto '.'
             ;
 
 expresion  :  expresion '+'   termino
@@ -104,7 +105,6 @@ factor   :  CTEF
 
 out  :    OUT '('   CADENA   ')'  '.'  {
                                       analizadorS.addEstructura (new Error ( analizadorS.estructuraOUT,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
-
     }
     |   OUT '(' CADENA ')'  error{
                         analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));

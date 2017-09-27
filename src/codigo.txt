@@ -1,15 +1,5 @@
-a:FLOAT
-IF (a+5*6==4+facu) THEN
-    BEGIN
-        a=4.
-        a=4
-        IF (a==5) THEN
-            BEGIN
-                a=6.
-
-            END.
-        END_IF.
-        b=2.
-    END.
+a:FLOAT.
+a:222222222222222282.
+IF (a==4) THEN
+    a=4.
 END_IF.
-**holis

@@ -51,16 +51,10 @@ public class CeldaAS extends CeldaABS{
                     double valorf= Double.parseDouble(cadenaf.replace(",","."));
                     t.setNombre(cadenaf);
                     if (valorf>maximoF){
-                        t.setNombre(""+maximoF);//Coloco el mayor valor aceptado por float
-                        if (!tablaSimb.existe(t.getNombre()))
-                            tablaSimb.addSimbolo(t);
-                        return -4;
+                        return -2;
                     }
                     if (valorf<minimoF){
-                        t.setNombre(""+minimoF);//Coloco el minimo valor aceptado por float
-                        if (!tablaSimb.existe(t.getNombre() ))
-                            tablaSimb.addSimbolo(t);
-                        return -4;
+                        return -2;
                     }
                 }
                 if(t.getUso() == AnalizadorLexico.CTEL) {
@@ -69,16 +63,10 @@ public class CeldaAS extends CeldaABS{
                     t.setTipo("long");
                     t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
                     if (valorl>maximoL){
-                        t.setNombre(""+maximoL);
-                        if (!tablaSimb.existe(t.getNombre() ))
-                            tablaSimb.addSimbolo(t);
-                        return -4;
+                        return -2;
                     }
                     if (valorl<minimoL){
-                        t.setNombre(""+minimoL);
-                        if (!tablaSimb.existe(t.getNombre() ))
-                            tablaSimb.addSimbolo(t);
-                        return -4;
+                        return -2;
                     }
                 }
 
