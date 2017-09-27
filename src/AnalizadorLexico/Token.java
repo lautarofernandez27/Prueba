@@ -22,7 +22,7 @@ public class Token {
         this.nombre = nombre;
         this.uso = uso;
 
-        if ( (uso>=analizador.IF) && (uso<=analizador.LONG) )
+        if ( (uso>=analizador.IF) && (uso<=analizador.L_D) )
             lexema = "Palabra reservada";
         else
         if (uso==analizador.ID)

@@ -20,6 +20,7 @@
 %token LET
 %token FLOAT
 %token LONG
+%token L_D
 %%
 
 %{
