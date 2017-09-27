@@ -41,6 +41,7 @@ public class AnalizadorLexico {
     static final int LET = 275;
     static final int FLOAT = 276;
     static final int LONG = 277;
+    static final int L_D = 278;
 
     static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
     static final String warningC = "Warning: Constante fuera de rango. La constante toma el valor minimo o maximo dependiendo su signo";
@@ -202,6 +203,7 @@ public class AnalizadorLexico {
                 case "WHILE": return WHILE;
                 case "DO": return DO;
                 case "LET": return LET;
+                case "L_D": return L_D;
                 default: return ID;
             }
         }

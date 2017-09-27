@@ -20,6 +20,7 @@
 %token LET
 %token FLOAT
 %token LONG
+%token L_D
 %%
 
 %{
@@ -48,11 +49,14 @@ declaracion  :  lista_variables ':' tipo '.'   {
                                                analizadorS.addEstructura (new Error ( analizadorS.estructuraDECLARACION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea()  ));
 
 }
-             | lista_variables ':' tipo    {
+             | lista_variables ':' tipo   error  {
                                                  analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
                                                     }
              | lista_variables ':' error  '.'{
                                             analizadorS.addError (new Error ( analizadorS.errorTipo,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+             }
+             | lista_variables error tipo '.' {
+                                             analizadorS.addError (new Error ( analizadorS.errorDosPuntos,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
              }
              ;
 
@@ -73,19 +77,13 @@ ejecucion : control
           | asignacion
           | out
           | let
-          | asignacion_sin_punto  { analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea()));
-          }
-
           ;
 
 
+asignacion  : ID  '=' expresion'.'{                      analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
-asignacion_sin_punto  :  ID  '=' expresion{
-                                          analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
-                        }
-                        ;
-
-asignacion  : asignacion_sin_punto '.'
+}
+            | ID  '=' expresion error
             ;
 
 expresion  :  expresion '+'   termino
@@ -105,6 +103,7 @@ factor   :  CTEF
 
 out  :    OUT '('   CADENA   ')'  '.'  {
                                       analizadorS.addEstructura (new Error ( analizadorS.estructuraOUT,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+
     }
     |   OUT '(' CADENA ')'  error{
                         analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
