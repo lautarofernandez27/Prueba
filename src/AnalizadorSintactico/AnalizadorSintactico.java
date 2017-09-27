@@ -32,6 +32,7 @@ public class AnalizadorSintactico {
     static final String errorDeclaracionVar = "No se declaro correctamente las variables.";
     static final String errorAsignacion = "Error en la asignacion.";
     static final String errorTipo = "Error al declarar el tipo.";
+    static final String errorDosPuntos = "Error: quiso poner ':'";
     static final String errorSimboloAsignacion = "La asignacion es con =";
     static final String errorPalabraWHILE = "Se esperaba la palabra WHILE en mayuscula ";
     static final String errorTipo_operacion = "Los tipos de las variables son incompatibles.";

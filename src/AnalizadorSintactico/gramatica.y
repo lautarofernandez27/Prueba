@@ -49,11 +49,14 @@ declaracion  :  lista_variables ':' tipo '.'   {
                                                analizadorS.addEstructura (new Error ( analizadorS.estructuraDECLARACION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea()  ));
 
 }
-             | lista_variables ':' tipo    {
+             | lista_variables ':' tipo   error  {
                                                  analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
                                                     }
              | lista_variables ':' error  '.'{
                                             analizadorS.addError (new Error ( analizadorS.errorTipo,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+             }
+             | lista_variables error tipo '.' {
+                                             analizadorS.addError (new Error ( analizadorS.errorDosPuntos,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
              }
              ;
 
@@ -72,20 +75,15 @@ tipo :  LONG
 ejecucion : control
           | seleccion
           | asignacion
-          | asignacion_sin_punto  { analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea()));}
           | out
           | let
           ;
 
 
-
-asignacion_sin_punto  :  ID  '=' expresion
-            ;
-
-asignacion  : asignacion_sin_punto '.'{                      analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
-
+asignacion  : ID  '=' expresion'.'{                      analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
 }
+            | ID  '=' expresion error
             ;
 
 expresion  :  expresion '+'   termino
