@@ -1,0 +1,14 @@
+** a) FLOAT con parte decimal
+a=1,10.
+
+** b) FLOAT sin parte decimal
+b=2,.
+
+** d) FLOAT sin exponente
+d=3,20.
+
+** c-e) FLOAT con exponente positivo
+e=4,3E11.
+
+** c-f) FLOAT con exponente negativo
+f=5,4E-12.

@@ -1,1 +1,3 @@
-Facu facu _fak 454trava
+_laucha:FLOAT.
+21facu:LONG.
+_22marian:LONG.

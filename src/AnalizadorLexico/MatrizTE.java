@@ -3,7 +3,6 @@ package AnalizadorLexico;
 public class MatrizTE {
 
     static final String error1 = "Error: caracter invalido";
-    static final String error2  = "Error al declarar un identificador. Los caracteres validos son letras, digitos y _";
     static final String error3 = "Error: olvido poner numero de exponente";
     static final String error4 = "Se esperaba ' para terminar la cadena";
     static final String error5 = "Los identificadores deben comenzar con letras";

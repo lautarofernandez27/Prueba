@@ -1,2 +1,2 @@
-lautarofernande:long.
-lautaro_fernande:long.
+faculaucmarian:LONG.
+lauchmarianfacun:FLOAT.
