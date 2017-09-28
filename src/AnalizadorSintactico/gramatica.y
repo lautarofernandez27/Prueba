@@ -110,6 +110,9 @@ termino  :  termino '*'  factor   {
                                                    t.setTipo(tokenFactor.getTipo());
                                                    tablaSimbolo.addSimbolo(t);
                                                 }
+                                                 if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())==CeldaAS.maximoL+1)){
+                                                                                                            analizadorL.addError(new Error(analizadorL.ErrorC,"Lexico",controladorArchivo.getLinea()));
+                                                                                                        }
                                      }
          |  termino '*' '-' factor  {
                                       Token tokenFactor= (Token) $4.obj;
@@ -119,7 +122,7 @@ termino  :  termino '*'  factor   {
                                            tablaSimbolo.addSimbolo(t);
                                       }
                                        else if (tokenFactor.getLexema().equals("Constante flotante"))
-                                                if  ((Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                                if  ((Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                            Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                            t.setTipo(tokenFactor.getTipo());
                                            tablaSimbolo.addSimbolo(t);
@@ -138,6 +141,9 @@ termino  :  termino '*'  factor   {
                                               t.setTipo(tokenFactor.getTipo());
                                               tablaSimbolo.addSimbolo(t);
                                           }
+                                       if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())==CeldaAS.maximoL+1)){
+                                                                                                  analizadorL.addError(new Error(analizadorL.ErrorC,"Lexico",controladorArchivo.getLinea()));
+                                                                                              }
                                  }
          |  termino '/' '-' factor  {
                                         Token tokenFactor= (Token) $4.obj;
@@ -147,7 +153,7 @@ termino  :  termino '*'  factor   {
                                              tablaSimbolo.addSimbolo(t);
                                         }
                                         else if (tokenFactor.getLexema().equals("Constante flotante"))
-                                                if (((Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0))){
+                                                if (((Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0))){
                                                   Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                                   t.setTipo(tokenFactor.getTipo());
                                                   tablaSimbolo.addSimbolo(t);
@@ -177,12 +183,13 @@ termino  :  termino '*'  factor   {
                                 t.setTipo(tokenFactor.getTipo());
                                 tablaSimbolo.addSimbolo(t);
                            }
-                           else if (tokenFactor.getLexema().equals("Constante flotante")){
+                           else if (tokenFactor.getLexema().equals("Constante flotante"))
                                    if (((Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN)) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                          Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                          t.setTipo(tokenFactor.getTipo());
                                          tablaSimbolo.addSimbolo(t);
-                             }}
+                             }
+
                         }
          ;
 
@@ -225,7 +232,7 @@ seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF  {
                                                                              analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
             }
-           |   IF '(' condicion  ')'  bloque_sentencias_control  END_IF  {
+           |   IF '(' condicion  ')'   bloque_sentencias_control  END_IF  {
                                                                                analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
             }
@@ -276,6 +283,7 @@ control    :   WHILE '(' condicion ')' DO bloque_sentencias_control '.' {
                                                                    analizadorS.addEstructura (new Error ( analizadorS.estructuraWHILE,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
             }
+            | WHILE '(' condicion ')' DO error '.'
             | WHILE '(' condicion DO bloque_sentencias_control  '.' {
                                                                          analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
@@ -295,11 +303,11 @@ condicion   :   expresion   comparador   expresion     {
                                                         analizadorS.addEstructura (new Error ( analizadorS.estructuraCONDICION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
             }
-            |   expresion   comparador     {
+            |   expresion   comparador   error  {
                                             analizadorS.addError (new Error ( analizadorS.errorCondicionD,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
             }
-            |  comparador  expresion   {
+            |  error comparador  expresion   {
                                         analizadorS.addError (new Error ( analizadorS.errorCondicionI,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
             }
