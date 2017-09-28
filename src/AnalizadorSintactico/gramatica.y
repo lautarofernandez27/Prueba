@@ -177,12 +177,15 @@ termino  :  termino '*'  factor   {
                                                                     t.setTipo(tokenFactor.getTipo());
                                                                     tablaSimbolo.addSimbolo(t);
                                                                }
-                                                               else if (tokenFactor.getLexema().equals("Constante flotante"))
+                                                               else if (tokenFactor.getLexema().equals("Constante flotante")){
+                                                                        System.out.print(Double.parseDouble(tokenFactor.getNombre().replace(",",".")));
+
                                                                        if ((Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                                                          Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                                                         System.out.print("hola2");
                                                                          t.setTipo(tokenFactor.getTipo());
                                                                          tablaSimbolo.addSimbolo(t);
-                                                                     }
+                                                                     }}
                                                             }
          ;
 
