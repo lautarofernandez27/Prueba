@@ -171,20 +171,19 @@ termino  :  termino '*'  factor   {
                                                         }
                              }
          |  '-' factor {
-                                                               Token tokenFactor= (Token) $2.obj;
-                                                               if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
-                                                                    Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
-                                                                    t.setTipo(tokenFactor.getTipo());
-                                                                    tablaSimbolo.addSimbolo(t);
-                                                               }
-                                                               else if (tokenFactor.getLexema().equals("Constante flotante"))
-                                                                       if ((((Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN)) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0))){
-                                                                     System.out.print("ENTREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                                                                     Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
-                                                                     t.setTipo(tokenFactor.getTipo());
-                                                                     tablaSimbolo.addSimbolo(t);
-                                                                 }
-                                                            }
+                           Token tokenFactor= (Token) $2.obj;
+                           if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
+                                Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                t.setTipo(tokenFactor.getTipo());
+                                tablaSimbolo.addSimbolo(t);
+                           }
+                           else if (tokenFactor.getLexema().equals("Constante flotante")){
+                                   if (((Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble("-"+tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN)) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                         Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                         t.setTipo(tokenFactor.getTipo());
+                                         tablaSimbolo.addSimbolo(t);
+                             }}
+                        }
          ;
 
 factor   :  CTEF
