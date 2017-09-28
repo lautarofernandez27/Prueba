@@ -1,5 +1,20 @@
-a=2147483647.
-a=-2147483648.
-a=2147483648.
-a=2147483649.
-a=-2147483649.
+** Constante LONG con el valor máximo del rango
+long1 = 2147483647.
+
+** Constante LONG con el valor mínimo del rango
+long2 = -2147483648.
+
+** Constante FLOAT con el valor máximo positivo del rango
+float1 = 3,40282347E38.
+
+** Constante FLOAT con el valor mínimo positivo del rango
+float2 = 1,17549435E-38.
+
+** Constante FLOAT con el valor máximo negativo del rango
+float3 = -1,17549435E-38.
+
+** Constante FLOAT con el valor mínimo negativo del rango
+float4 = -3,40282347E38.
+
+** Constante FLOAT con el valor 0,0
+float5 = 0,0.
