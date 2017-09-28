@@ -45,7 +45,7 @@ public class AnalizadorLexico {
     static final int L_D = 278;
 
     static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
-    static final String ErrorC = "Constante fuera de rango.";
+    public static final String ErrorC = "Constante fuera de rango.";
 
     //Los tokens que se van identificando se almacenan en una lista
     private ArrayList<Token> tokens = new ArrayList<>();
@@ -271,6 +271,9 @@ public class AnalizadorLexico {
         return errores;
     }
 
+    public void addError(Error e){
+        erroresComp.add(e);
+    }
 
     public String mostrarTs(){
 
