@@ -91,44 +91,84 @@ expresion  :  expresion '+'  termino
            |  termino
            ;
 
-termino  :  termino '*'  factor
+termino  :  termino '*'  factor   {
+                                           Token tokenFactor= (Token) $3.obj;
+                                           if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                                                 Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                                 t.setTipo(tokenFactor.getTipo());
+                                                 tablaSimbolo.addSimbolo(t);
+                                           }
+                                           else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                                   Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                                   t.setTipo(tokenFactor.getTipo());
+                                                   tablaSimbolo.addSimbolo(t);
+                                                }
+                                     }
          |  termino '*' '-' factor  {
-                                                               Token tokenFactor= (Token) $4.obj;
-                                                               if (!tokenFactor.getLexema().equals("Identificador")){
+                                      Token tokenFactor= (Token) $4.obj;
+                                      if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
+                                           Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                           t.setTipo(tokenFactor.getTipo());
+                                           tablaSimbolo.addSimbolo(t);
+                                      }
+                                       else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                           Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                           t.setTipo(tokenFactor.getTipo());
+                                           tablaSimbolo.addSimbolo(t);
+                                         }
+                                   }
+         |  termino '/' factor   {
+                                     Token tokenFactor= (Token) $3.obj;
+                                     if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                                        Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                        t.setTipo(tokenFactor.getTipo());
+                                        tablaSimbolo.addSimbolo(t);
+                                     }
+                                      else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                              Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                              t.setTipo(tokenFactor.getTipo());
+                                              tablaSimbolo.addSimbolo(t);
+                                          }
+                                 }
+         |  termino '/' '-' factor  {
+                                        Token tokenFactor= (Token) $4.obj;
+                                        if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
+                                             Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                             t.setTipo(tokenFactor.getTipo());
+                                             tablaSimbolo.addSimbolo(t);
+                                        }
+                                        else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                                  Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                                  t.setTipo(tokenFactor.getTipo());
+                                                  tablaSimbolo.addSimbolo(t);
+                                              }
+                                     }
+         |  factor      {
+                            Token tokenFactor= (Token) $1.obj;
+                            if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                                Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                t.setTipo(tokenFactor.getTipo());
+                                tablaSimbolo.addSimbolo(t);
+                            }
+                            else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                     Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                     t.setTipo(tokenFactor.getTipo());
+                                     tablaSimbolo.addSimbolo(t);
+                                 }
+                       }
+         |  '-' factor {
+                                                               Token tokenFactor= (Token) $2.obj;
+                                                               if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
                                                                     Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                                                     t.setTipo(tokenFactor.getTipo());
                                                                     tablaSimbolo.addSimbolo(t);
-
                                                                }
-                                                            }
-         |  termino '/' factor
-         |  termino '/' '-' factor  {
-                                                                        Token tokenFactor= (Token) $4.obj;
-                                                                        if (!tokenFactor.getLexema().equals("Identificador")){
-                                                                             Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
-                                                                             t.setTipo(tokenFactor.getTipo());
-                                                                             tablaSimbolo.addSimbolo(t);
-
-                                                                        }
+                                                               else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                                                         Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                                                         t.setTipo(tokenFactor.getTipo());
+                                                                         tablaSimbolo.addSimbolo(t);
                                                                      }
-         |  factor      {
-                            Token tokenFactor= (Token) $1.obj;
-                            if (!tokenFactor.getLexema().equals("Identificador")){
-                                 Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
-                                 t.setTipo(tokenFactor.getTipo());
-                                 tablaSimbolo.addSimbolo(t);
-
-                            }
-                         }
-         |  '-' factor {
-                         Token tokenFactor= (Token) $2.obj;
-                         if (!tokenFactor.getLexema().equals("Identificador")){
-                            Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
-                            t.setTipo(tokenFactor.getTipo());
-                            tablaSimbolo.addSimbolo(t);
-
-                         }
-                        }
+                                                            }
          ;
 
 factor   :  CTEF
@@ -163,32 +203,32 @@ let  :    LET  asignacion   {
 }
 
 ;
-seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF  '.' {
+seleccion  :   IF '(' condicion  ')' THEN   bloque_sentencias_control  END_IF  {
                                                                              analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
             }
-           |   IF '(' condicion  ')'   bloque_sentencias_control  END_IF   '.'{
+           |   IF '(' condicion  ')'   bloque_sentencias_control  END_IF  {
                                                                                analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
             }
-           |   IF '(' condicion  ')' THEN   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF    '.'{
+           |   IF '(' condicion  ')' THEN   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF   {
                                                                              analizadorS.addEstructura (new Error ( analizadorS.estructuraIF,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
            }
-           |   IF '(' condicion  ')'   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF    '.'{
+           |   IF '(' condicion  ')'   bloque_sentencias_control  ELSE bloque_sentencias_control END_IF  {
                                                                              analizadorS.addError (new Error ( analizadorS.faltaThen,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
            }
-           |   IF condicion ')' THEN bloque_sentencias_control  END_IF  '.' {
+           |   IF condicion ')' THEN bloque_sentencias_control  END_IF  {
                                                                             analizadorS.addError (new Error ( analizadorS.errorParentesisA,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
             }
-           |   IF '(' condicion THEN bloque_sentencias_control  END_IF  '.' {
+           |   IF '(' condicion THEN bloque_sentencias_control  END_IF  {
                                                                                        analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
            }
-           |   IF condicion ')' THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF  '.' {
+           |   IF condicion ')' THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF   {
                                                                                        analizadorS.addError (new Error ( analizadorS.errorParentesisA,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
            }
-           |   IF '(' condicion THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF  '.' {
+           |   IF '(' condicion THEN bloque_sentencias_control  ELSE bloque_sentencias_control  END_IF  {
                                                                                                   analizadorS.addError (new Error ( analizadorS.errorParentesisB,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
            }
 ;

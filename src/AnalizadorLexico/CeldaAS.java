@@ -2,10 +2,12 @@ package AnalizadorLexico;
 
 public class CeldaAS extends CeldaABS{
 
-    private static final double maximoF = 3.40282347E38;
-    private static final double minimoF = 1.17549435E-38;
-    private static final long maximoL = 2147483647;
-    private static final long minimoL = -2147483648;
+    public static final double maximoFP = 3.40282347E38;
+    public static final double maximoFN = -1.17549435E-38;
+    public static final double minimoFP = 1.17549435E-38;
+    public static final double minimoFN = -3.40282347E38;
+    public static final long maximoL = 2147483647;
+    public static final long minimoL = -2147483648;
 
 
     private TablaSimbolos tablaSimb;
@@ -50,10 +52,10 @@ public class CeldaAS extends CeldaABS{
                     String cadenaf = t.getNombre();
                     double valorf= Double.parseDouble(cadenaf.replace(",","."));
                     t.setNombre(cadenaf);
-                    if (valorf>maximoF){
+                    if (valorf>maximoFP){
                         return -4;
                     }
-                    if (valorf<minimoF){
+                    if ((valorf<minimoFP)&&  (valorf != 0.0)){
                         return -4;
                     }
                 }
