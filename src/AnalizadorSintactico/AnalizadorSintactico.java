@@ -19,7 +19,6 @@ public class AnalizadorSintactico {
     static final String estructuraDECLARACION = "Sentencia de declaracion de variables.";
     static final String estructuraLET = "Sentencia de LET";
     static final String estructuraCONVERSION = "Sentencia de CONVERSION ";
-    static final String estructuraASIGnegativo = "Sentencia de ASIGNACION negativa ";
 
     //descripciones errores sintacticos
     static final String errorOUT1 = "Existe un error en la sentencia OUT ";
@@ -38,6 +37,7 @@ public class AnalizadorSintactico {
     static final String errorTipo_operacion = "Los tipos de las variables son incompatibles.";
     static final String errorPalabraIF = "Se esperaba la palabra IF";
     static final String faltaThen = "Se esperaba la palabra THEN";
+    static final String faltaEND_IF = "Se esperaba la palabra END_IF al final del control";
     static final String faltaDO = "Se esperaba la palabra DO";
     static final String errorEND = "No se coloco END para finalizar el bloque de sentencias";
     static final String errorBEGIN = "No se coloco BEGIN para iniciar el bloque de sentencias";
