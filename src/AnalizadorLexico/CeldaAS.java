@@ -64,7 +64,7 @@ public class CeldaAS extends CeldaABS{
                     long valorl= Long.parseLong(cadenal);
                     t.setTipo("long");
                     t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
-                    if (valorl>maximoL){
+                    if (valorl>maximoL+1){
                         return -4;
                     }
                     if (valorl<minimoL){

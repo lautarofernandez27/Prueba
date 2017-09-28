@@ -160,7 +160,10 @@ termino  :  termino '*'  factor   {
                                      t.setTipo(tokenFactor.getTipo());
                                      tablaSimbolo.addSimbolo(t);
                                  }
-                       }
+                            if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())==CeldaAS.maximoL+1)){
+                                                            analizadorL.addError(new Error(analizadorL.ErrorC,"Lexico",controladorArchivo.getLinea()));
+                                                        }
+                             }
          |  '-' factor {
                                                                Token tokenFactor= (Token) $2.obj;
                                                                if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
