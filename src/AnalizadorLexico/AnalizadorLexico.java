@@ -8,6 +8,7 @@ public class AnalizadorLexico {
     static final int F = -1;  //F Es la constante que indica un estado final !
     static final int E = -2;  //E Es la constante que indica un estado de error !
     static final int WI = -3; //WI Es la constante que indica un Warning de identificador
+    static final int EC= -4; //WI Es la constante que indica un Warning de identificador
 
     public static final String constanteF = "constante flotante";
     public static final String variableF = "float";
@@ -44,7 +45,7 @@ public class AnalizadorLexico {
     static final int L_D = 278;
 
     static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
-    static final String warningC = "Warning: Constante fuera de rango. La constante toma el valor minimo o maximo dependiendo su signo";
+    static final String ErrorC = "Constante fuera de rango.";
 
     //Los tokens que se van identificando se almacenan en una lista
     private ArrayList<Token> tokens = new ArrayList<>();
@@ -160,6 +161,8 @@ public class AnalizadorLexico {
         estadoActual = celdaActual.ejecutar_celda(new Token( token_buffer.toString(), calcularUso(estadoAnterior,token_buffer.toString()) ) );
         if (estadoActual == WI)
             erroresWarning.add( new Error(warningI, "WI", lineaActual) );
+        if (estadoActual == EC)
+            erroresComp.add(new Error(ErrorC,"Lexico",lineaActual));
         return estadoAnterior;
     }
 

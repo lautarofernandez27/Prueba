@@ -51,10 +51,10 @@ public class CeldaAS extends CeldaABS{
                     double valorf= Double.parseDouble(cadenaf.replace(",","."));
                     t.setNombre(cadenaf);
                     if (valorf>maximoF){
-                        return -2;
+                        return -4;
                     }
                     if (valorf<minimoF){
-                        return -2;
+                        return -4;
                     }
                 }
                 if(t.getUso() == AnalizadorLexico.CTEL) {
@@ -63,10 +63,10 @@ public class CeldaAS extends CeldaABS{
                     t.setTipo("long");
                     t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
                     if (valorl>maximoL){
-                        return -2;
+                        return -4;
                     }
                     if (valorl<minimoL){
-                        return -2;
+                        return -4;
                     }
                 }
 
