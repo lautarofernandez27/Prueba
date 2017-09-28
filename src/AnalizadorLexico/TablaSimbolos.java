@@ -14,7 +14,6 @@ public class TablaSimbolos {
 
     public void addSimbolo( Token t){
         tSimb.put(t.getNombre().toLowerCase(), t);
-        System.out.print("Agregue "+t.getNombre());
     }
 
 
