@@ -1,2 +1,17 @@
-a:long.
-a=2147483648.
+** Constante LONG con el primer valor mayor al rango
+long1 = 2147483648.
+
+** Constante LONG con el primer valor menor al rango
+long2 = -2147483649.
+
+** Constante FLOAT con el primer valor mayor al rango positivo
+float1 = 3,40282348E38.
+
+** Constante FLOAT con el primer valor menor al rango positivo
+float2 = 1,17549434E-38.
+
+** Constante FLOAT con el primer valor mayor al rango negativo
+float3 = -1,17549434E-38.
+
+** Constante FLOAT con el primer valor menor al rango negativo
+float4 = -3,40282348E38.

@@ -11,7 +11,7 @@ float1 = 3,40282347E38.
 float2 = 1,17549435E-38.
 
 ** Constante FLOAT con el valor máximo negativo del rango
-float3 = -4,17549435E-38.
+float3 = -1,17549435E-38.
 
 ** Constante FLOAT con el valor mínimo negativo del rango
 float4 = -3,40282347E38.
