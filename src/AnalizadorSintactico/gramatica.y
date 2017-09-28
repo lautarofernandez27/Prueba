@@ -83,7 +83,12 @@ ejecucion : control
 asignacion  : ID  '=' expresion'.'{                      analizadorS.addEstructura (new Error ( analizadorS.estructuraASIG,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
 }
-            | ID  '=' expresion error
+            | ID  '=' expresion error  {
+                                           analizadorS.addError (new Error ( analizadorS.errorPuntoFinal,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+                                      }
+            | ID  '=' error '.' {
+                                 analizadorS.addError (new Error ( analizadorS.errorAsignacion,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+            }
             ;
 
 expresion  :  expresion '+'  termino
@@ -93,12 +98,12 @@ expresion  :  expresion '+'  termino
 
 termino  :  termino '*'  factor   {
                                            Token tokenFactor= (Token) $3.obj;
-                                           if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                                           if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<=CeldaAS.maximoL)){
                                                  Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                                  t.setTipo(tokenFactor.getTipo());
                                                  tablaSimbolo.addSimbolo(t);
                                            }
-                                           else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                           else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                                    Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                                    t.setTipo(tokenFactor.getTipo());
                                                    tablaSimbolo.addSimbolo(t);
@@ -106,12 +111,12 @@ termino  :  termino '*'  factor   {
                                      }
          |  termino '*' '-' factor  {
                                       Token tokenFactor= (Token) $4.obj;
-                                      if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
+                                      if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
                                            Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                            t.setTipo(tokenFactor.getTipo());
                                            tablaSimbolo.addSimbolo(t);
                                       }
-                                       else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                       else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                            Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                            t.setTipo(tokenFactor.getTipo());
                                            tablaSimbolo.addSimbolo(t);
@@ -119,12 +124,12 @@ termino  :  termino '*'  factor   {
                                    }
          |  termino '/' factor   {
                                      Token tokenFactor= (Token) $3.obj;
-                                     if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                                     if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<=CeldaAS.maximoL)){
                                         Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                         t.setTipo(tokenFactor.getTipo());
                                         tablaSimbolo.addSimbolo(t);
                                      }
-                                      else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                      else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                               Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                               t.setTipo(tokenFactor.getTipo());
                                               tablaSimbolo.addSimbolo(t);
@@ -132,12 +137,12 @@ termino  :  termino '*'  factor   {
                                  }
          |  termino '/' '-' factor  {
                                         Token tokenFactor= (Token) $4.obj;
-                                        if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
+                                        if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
                                              Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                              t.setTipo(tokenFactor.getTipo());
                                              tablaSimbolo.addSimbolo(t);
                                         }
-                                        else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                        else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                                   Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                                   t.setTipo(tokenFactor.getTipo());
                                                   tablaSimbolo.addSimbolo(t);
@@ -145,12 +150,12 @@ termino  :  termino '*'  factor   {
                                      }
          |  factor      {
                             Token tokenFactor= (Token) $1.obj;
-                            if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<CeldaAS.maximoL)){
+                            if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())<=CeldaAS.maximoL)){
                                 Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                 t.setTipo(tokenFactor.getTipo());
                                 tablaSimbolo.addSimbolo(t);
                             }
-                            else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                            else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFP) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFP) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                      Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
                                      t.setTipo(tokenFactor.getTipo());
                                      tablaSimbolo.addSimbolo(t);
@@ -158,12 +163,12 @@ termino  :  termino '*'  factor   {
                        }
          |  '-' factor {
                                                                Token tokenFactor= (Token) $2.obj;
-                                                               if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>CeldaAS.minimoL)){
+                                                               if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong("-"+tokenFactor.getNombre())>=CeldaAS.minimoL)){
                                                                     Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                                                     t.setTipo(tokenFactor.getTipo());
                                                                     tablaSimbolo.addSimbolo(t);
                                                                }
-                                                               else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
+                                                               else if ((tokenFactor.getLexema().equals("Constante flotante")) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))<=CeldaAS.maximoFN) && (Double.parseDouble(tokenFactor.getNombre().replace(",","."))>=CeldaAS.minimoFN) || (Double.parseDouble(tokenFactor.getNombre().replace(",","."))==0.0)){
                                                                          Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
                                                                          t.setTipo(tokenFactor.getTipo());
                                                                          tablaSimbolo.addSimbolo(t);
@@ -194,6 +199,9 @@ out  :    OUT '('   CADENA   ')'  '.'  {
     }
     |   '(' CADENA ')'  '.'{
                         analizadorS.addError (new Error ( analizadorS.errorOUT2,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+    }
+    |  error '(' CADENA ')' '.' {
+                                 analizadorS.addError (new Error ( analizadorS.errorOUT2,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
     }
 ;
 
