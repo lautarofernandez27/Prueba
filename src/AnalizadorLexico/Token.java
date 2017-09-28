@@ -18,6 +18,7 @@ public class Token {
     Hashtable<String, Integer> tablaTokens = new Hashtable<>();
     AnalizadorLexico analizador = new AnalizadorLexico(null,null);
 
+
     public Token (String nombre, int uso){
         this.nombre = nombre;
         this.uso = uso;

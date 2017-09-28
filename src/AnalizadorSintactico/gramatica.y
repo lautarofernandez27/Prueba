@@ -86,14 +86,49 @@ asignacion  : ID  '=' expresion'.'{                      analizadorS.addEstructu
             | ID  '=' expresion error
             ;
 
-expresion  :  expresion '+'   termino
-           |  expresion '-'   termino
+expresion  :  expresion '+'  termino
+           |  expresion '-'  termino
            |  termino
            ;
 
 termino  :  termino '*'  factor
-         |  termino '/'  factor
-         |  factor
+         |  termino '*' '-' factor  {
+                                                               Token tokenFactor= (Token) $4.obj;
+                                                               if (!tokenFactor.getLexema().equals("Identificador")){
+                                                                    Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                                                    t.setTipo(tokenFactor.getTipo());
+                                                                    tablaSimbolo.addSimbolo(t);
+
+                                                               }
+                                                            }
+         |  termino '/' factor
+         |  termino '/' '-' factor  {
+                                                                        Token tokenFactor= (Token) $4.obj;
+                                                                        if (!tokenFactor.getLexema().equals("Identificador")){
+                                                                             Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                                                                             t.setTipo(tokenFactor.getTipo());
+                                                                             tablaSimbolo.addSimbolo(t);
+
+                                                                        }
+                                                                     }
+         |  factor      {
+                            Token tokenFactor= (Token) $1.obj;
+                            if (!tokenFactor.getLexema().equals("Identificador")){
+                                 Token t=new Token(tokenFactor.getNombre(),tokenFactor.getUso());
+                                 t.setTipo(tokenFactor.getTipo());
+                                 tablaSimbolo.addSimbolo(t);
+
+                            }
+                         }
+         |  '-' factor {
+                         Token tokenFactor= (Token) $2.obj;
+                         if (!tokenFactor.getLexema().equals("Identificador")){
+                            Token t=new Token("-"+tokenFactor.getNombre(),tokenFactor.getUso());
+                            t.setTipo(tokenFactor.getTipo());
+                            tablaSimbolo.addSimbolo(t);
+
+                         }
+                        }
          ;
 
 factor   :  CTEF
