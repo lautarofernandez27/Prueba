@@ -9,7 +9,6 @@ public class MatrizTE {
 
     static final int col=17;
     static final String compilacion= "Error de compilacion";
-    static final String warning= "Warning";
 
     TablaSimbolos tablaSimb;
     CeldaABS matTrans[][];
@@ -50,7 +49,7 @@ public class MatrizTE {
             return 15;
         if ( ( c.charValue()== ' ' ) || (c.charValue() ==  '	' ) )
             return 16;
-        if ( c.charValue()== '$') //ver como es fin de archivo
+        if ( c.charValue()== '$')
             return 12;
         if ( c.isLetter(c) ) //que pregunte primero las letras particulares
             return 1;

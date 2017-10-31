@@ -1,0 +1,22 @@
+a:FLOAT.
+a=4.
+a=4+a-2.
+b,c:LONG.
+b=5.
+IF (L_D(a+1)<b) THEN
+    c=1.
+ELSE
+    LET a=2.
+END_IF
+IF (b<2) THEN
+BEGIN
+    a=a+1.
+    b=2.
+    WHILE (b<2) DO
+    BEGIN
+        a=a*5.
+        b=b+1.
+    END.
+    .
+END.
+END_IF

@@ -10,14 +10,6 @@ public class AnalizadorLexico {
     static final int WI = -3; //WI Es la constante que indica un Warning de identificador
     static final int EC= -4; //WI Es la constante que indica un Warning de identificador
 
-    public static final String constanteF = "constante flotante";
-    public static final String variableF = "float";
-
-    static final String identificador = "I";
-
-    public static final String constanteL = "constante long";
-    public static final String variableL = "long";
-
     //Constantes para YACC
     public static final int ID = 257;
     public static final int CTEL = 258;
@@ -71,7 +63,7 @@ public class AnalizadorLexico {
     //Tiene toda la funcionalidad del archivo
     private ControladorArchivo archivo;
 
-    //Matriz transicion de estados. Hice la clase por toda la inicializacion pero lo vemos
+    //Matriz transicion de estados
     private MatrizTE matTrans;
 
     //
@@ -92,11 +84,6 @@ public class AnalizadorLexico {
         agregarTokens();
 
 
-    }
-
-    public void consumirToken(){
-        while (!archivo.finArchivo())
-            sigToken();
     }
 
     //Se encarga de agregar los valores correspondientes de cada token para ser identificados por el YACC
