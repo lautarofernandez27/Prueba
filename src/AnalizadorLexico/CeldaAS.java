@@ -11,7 +11,7 @@ public class CeldaAS extends CeldaABS{
 
 
     private TablaSimbolos tablaSimb;
-    private Error error;// ver si esta bien aca
+    private Error error;
 
 
     public CeldaAS(int proxEstado, TablaSimbolos tablaSimb, Error error){
@@ -45,7 +45,7 @@ public class CeldaAS extends CeldaABS{
                 }
 
                 //Se chequea el valor de la constante
-                //Si esta fuera de los limites, tambien lo trunco al maximo o minimo correspondiente.
+                //Si esta fuera de los limites, devuelvo error
 
                 if (t.getUso() == AnalizadorLexico.CTEF) {
                     t.setTipo("float");
@@ -63,7 +63,7 @@ public class CeldaAS extends CeldaABS{
                     String cadenal = t.getNombre();
                     long valorl= Long.parseLong(cadenal);
                     t.setTipo("long");
-                    t.setNombre(cadenal);//Coloco el mayor valor aceptado por long
+                    t.setNombre(cadenal);
                     if (valorl>maximoL+1){
                         return -4;
                     }
@@ -72,7 +72,7 @@ public class CeldaAS extends CeldaABS{
                     }
                 }
 
-                //Si es un ID o CTE, va a la tabla de simbolos.
+                //Si es un ID o Cadena va a la tabla de simbolos
                 if(tablaSimb.es_Agregable(t))
                     tablaSimb.addSimbolo(t);
 

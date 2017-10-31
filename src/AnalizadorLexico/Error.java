@@ -2,8 +2,7 @@ package AnalizadorLexico;
 
 public class Error {
     String descripcion;
-    //Warning o error de compilacion. ver despues pueden ser mas
-    // puede que no sirva mas porque tenemos dos listas.
+    //Warning o error de compilacion
     String tipo;
     int linea;
 

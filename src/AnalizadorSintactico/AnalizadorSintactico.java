@@ -28,16 +28,10 @@ public class AnalizadorSintactico {
     static final String errorCondicionI = "No se reconoce el lado izquierdo de la condicion ";
     static final String errorCondicionD = "No se reconoce el lado derecho de la condicion ";
     static final String errorPuntoFinal = "Se espera un '.' al final de la sentencia ";
-    static final String errorDeclaracionVar = "No se declaro correctamente las variables.";
     static final String errorAsignacion = "Error en la asignacion.";
     static final String errorTipo = "Error al declarar el tipo.";
     static final String errorDosPuntos = "Error: quiso poner ':'";
-    static final String errorSimboloAsignacion = "La asignacion es con =";
-    static final String errorPalabraWHILE = "Se esperaba la palabra WHILE en mayuscula ";
-    static final String errorTipo_operacion = "Los tipos de las variables son incompatibles.";
-    static final String errorPalabraIF = "Se esperaba la palabra IF";
     static final String faltaThen = "Se esperaba la palabra THEN";
-    static final String faltaEND_IF = "Se esperaba la palabra END_IF al final del control";
     static final String faltaDO = "Se esperaba la palabra DO";
     static final String errorEND = "No se coloco END para finalizar el bloque de sentencias";
     static final String errorBEGIN = "No se coloco BEGIN para iniciar el bloque de sentencias";

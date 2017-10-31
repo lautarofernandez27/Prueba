@@ -25,19 +25,14 @@ public class Main {
 
         StringBuilder buffer = new StringBuilder();
         try{
-            //lectura de ubicacion de archivo
-//			System.out.print("Ingrese la ubicacion del archivo: ");
-//			BufferedReader ubicacion = new BufferedReader(new InputStreamReader(System.in));
             codigo = new BufferedReader( new FileReader( ubicacion.readLine() ) );
             String readLine;
-            //TODO: Check que el \n no arruine nada
             while ((readLine = codigo.readLine())!= null) {
                 buffer.append(readLine+"\n");
             }
             buffer.append("$");
         }
         catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         catch (IOException e) {
@@ -46,14 +41,11 @@ public class Main {
         }
         return buffer;
     }
-    public static void main (String [] args){
-
-        //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
-
-        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\TP1_8.txt");
+    public static void main (String [] args) {
+        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\"+args[0]);
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
-        System.out.println("COMPILADORG17\n");
+        System.out.println("COMPILADORG7\n");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
