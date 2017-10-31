@@ -61,7 +61,7 @@ declaracion  :  lista_variables ':' tipo '.'   {
              ;
 
 
-lista_variables  :  lista_variables ',' ID
+lista_variables  : lista_variables ',' ID
                  |  ID
                  ;
 
