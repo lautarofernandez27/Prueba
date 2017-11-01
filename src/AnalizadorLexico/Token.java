@@ -55,6 +55,11 @@ public class Token {
             lexema = "Simbolo";
     }
 
+    public Token(String numeroTercetoString) {
+        // Usado para los tercetos
+        nombre = numeroTercetoString;
+    }
+
 
     public int getUso() {
         return uso;

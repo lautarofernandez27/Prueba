@@ -39,7 +39,7 @@ public abstract class Terceto {
             else
                 terceto = terceto + ")";
         }
-        return terceto;
+        return terceto+" - "+varAux;
     }
 
     public void setElemento(int index, TercetoSimple t){
