@@ -55,6 +55,7 @@ public class Token {
             lexema = "Simbolo";
     }
 
+
     public int getUso() {
         return uso;
     }
