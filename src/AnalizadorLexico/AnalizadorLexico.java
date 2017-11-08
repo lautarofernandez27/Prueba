@@ -59,7 +59,6 @@ public class AnalizadorLexico {
     private ArrayList<Error> erroresComp;
     private ArrayList<Error> erroresWarning;
     private boolean errorEncontrado;
-
     //Estado actual. El estado inicial es siempre 0.
     //El estadoAnterior se utiliza para reconocer el token una vez que se llega al estado Final.
     private int estadoActual;
@@ -91,8 +90,6 @@ public class AnalizadorLexico {
         erroresWarning = new ArrayList<Error>();
 
         agregarTokens();
-
-
     }
 
     //Se encarga de agregar los valores correspondientes de cada token para ser identificados por el YACC
