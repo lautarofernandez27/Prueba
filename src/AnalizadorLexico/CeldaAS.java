@@ -36,10 +36,6 @@ public class CeldaAS extends CeldaABS{
             if (t != null){
                 //Se chequea si es un ID, si el nombre es >15 lo trunco.
                 if ((t.getNombre().length()>15) && (t.getUso()== AnalizadorLexico.ID) ){
-                    String truncar=t.getNombre() ;
-                    t.setNombre( truncar.substring(0, 14) );
-                    if (!tablaSimb.existe(t.getNombre() ))
-                        tablaSimb.addSimbolo(t);
 
                     return -3;
                 }

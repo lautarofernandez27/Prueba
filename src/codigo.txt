@@ -10,3 +10,5 @@ WHILE (a==b)DO
         a=1.
     END_IF
 .
+a:LONG.
+a=b.
