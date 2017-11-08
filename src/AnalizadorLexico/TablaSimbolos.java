@@ -13,7 +13,14 @@ public class TablaSimbolos {
     }
 
     public void addSimbolo( Token t){
-        tSimb.put(t.getNombre().toLowerCase(), t);
+        if (t.getUso()== AnalizadorLexico.ID){
+            int indice= existe(t.getNombre())+1;
+            t.setNombre(t.getNombre().toLowerCase()+"@"+indice);
+            tSimb.put(t.getNombre(), t);
+
+        }
+        else
+            tSimb.put(t.getNombre(), t);
     }
 
 
@@ -32,16 +39,23 @@ public class TablaSimbolos {
         return new ArrayList<>(tSimb.values());
     }
 
-    public boolean existe(String nombre){
-        return tSimb.containsKey(nombre);
+    public int existe(String nombre) {
+        boolean encontre= true;
+        for (int i=0;encontre;i++)
+            if (!tSimb.containsKey(nombre.toLowerCase()+"@"+i)) {
+                return i-1;
+            }
+
+        return -1;
     }
 
     public Token getToken(String nombre){
-        if (tSimb.containsKey(nombre))
-            return tSimb.get(nombre);
+        if (existe(nombre)!=-1)
+            return tSimb.get(nombre.toLowerCase()+"@"+existe(nombre));
         else
             return null;
     }
+
 
     public void borrarSimbolo(String nombre) {
             if(tSimb.containsKey(nombre)){

@@ -51,17 +51,15 @@ declaracion  :  lista_variables ':' tipo '.'   {
                                                	String tipo = ((Token) $3.obj).getNombre();
 
                                                	for(Token t : (ArrayList<Token>)$1.obj ){
-                                               		/*Chequear que la variable ya no este declarada*/
                                                		Token t1 = new Token(t.getNombre(), t.getUso() );
+                                               	    if ((t1.getNombre().length()>15) && (t1.getUso()== AnalizadorLexico.ID) ){
+                                                                    String truncar=t1.getNombre() ;
+                                                                    t1.setNombre( truncar.substring(0, 14) );
+                                                    }
 
-                                               			if (tablaSimbolo.existe(t1.getNombre())){
-                                               	 			analizadorCI.addError (new Error ( analizadorCI.errorVariableRedeclarada,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
-                                               			}
-                                               	 		else {
-                                               	 			//la variable no fue declarada
                                                				t1.setTipo(tipo);
                                                				tablaSimbolo.addSimbolo(t1);
-                                               	 		}
+
 
                                                }
                                                analizadorS.addEstructura (new Error ( analizadorS.estructuraDECLARACION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea()  ));
@@ -115,7 +113,7 @@ asignacion  : ID  '=' expresion'.'{  analizadorS.addEstructura (new Error ( anal
 										if(!tipoCompatible(t1,t2))
 											analizadorCI.addError (new Error ( analizadorCI.errorFaltaAllow,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
 									}
-                                    TercetoAsignacion terceto = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ),  new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
+                                    TercetoAsignacion terceto = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple(t),  new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
                                     controladorTercetos.addTerceto (terceto);
 
 }
