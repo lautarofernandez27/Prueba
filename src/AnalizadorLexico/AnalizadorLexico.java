@@ -10,33 +10,42 @@ public class AnalizadorLexico {
     static final int WI = -3; //WI Es la constante que indica un Warning de identificador
     static final int EC= -4; //WI Es la constante que indica un Warning de identificador
 
+
+    public static final String constanteF = "Constante float";
+    public static final String variableF = "float";
+
+    public static final String constanteL = "constante long";
+    public static final String variableL = "long";
+
+
+
     //Constantes para YACC
     public static final int ID = 257;
     public static final int CTEL = 258;
     public static final int S_IGUAL_IGUAL = 259;
     public static final int S_MAYOR_IGUAL = 260;
     public static final int S_MENOR_IGUAL = 261;
-    static final int S_DESIGUAL = 262;	//<>
+    public static final int S_DESIGUAL = 262;
     public static final int CTEF = 263;
     public static final int COMENTARIO = 264;
     public static final int CADENA = 265;
 
     //PALABRA RESERVADA
-    static final int IF = 266;
-    static final int THEN = 267;
-    static final int ELSE = 268;
-    static final int END_IF = 269;
+    public static final int IF = 266;
+    public static final int THEN = 267;
+    public static final int ELSE = 268;
+    public static final int END_IF = 269;
     public static final int OUT = 270;
-    static final int BEGIN = 271;
-    static final int END = 272;
-    static final int WHILE = 273;
-    static final int DO = 274;
-    static final int LET = 275;
-    static final int FLOAT = 276;
-    static final int LONG = 277;
-    static final int L_D = 278;
+    public static final int BEGIN = 271;
+    public static final int END = 272;
+    public static final int WHILE = 273;
+    public static final int DO = 274;
+    public static final int LET = 275;
+    public static final int FLOAT = 276;
+    public static final int LONG = 277;
+    public static final int L_F = 278;
 
-    static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
+    public static final String warningI = "Warning: Identificador truncado por superar 15 caracteres.";
     public static final String ErrorC = "Constante fuera de rango.";
 
     //Los tokens que se van identificando se almacenan en una lista
@@ -193,7 +202,7 @@ public class AnalizadorLexico {
                 case "WHILE": return WHILE;
                 case "DO": return DO;
                 case "LET": return LET;
-                case "L_D": return L_D;
+                case "L_D": return L_F;
                 default: return ID;
             }
         }

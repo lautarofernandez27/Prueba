@@ -14,8 +14,7 @@ public class TercetoSimple {
     }
 
     public String imprimirTerceto() {
-        char c = t.getNombre().charAt(0);
-        if (Character.isDigit(c))
+        if (t.isNumTerceto())
             return "[" + t.getNombre() + "]";
         else
             return t.getNombre();

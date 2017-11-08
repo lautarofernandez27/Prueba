@@ -1,4 +1,12 @@
-a=2147483647.
-a=a*2147483648.
-a=-2147483648.
-a=-2147483649.
+a,b:LONG.
+WHILE (a==b)DO
+    IF (a==b) THEN
+        BEGIN
+            a=4,5.
+            b=a.
+            b=a+b.
+        END.
+    ELSE
+        a=1.
+    END_IF
+.

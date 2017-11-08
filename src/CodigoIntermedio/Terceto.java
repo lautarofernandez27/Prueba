@@ -7,14 +7,12 @@ public abstract class Terceto {
     protected int numeroTerceto;
     protected ControladorTercetos controladorTercetos;
     int posicion;
-    int varAux;
 
-    public Terceto(TercetoSimple izq, TercetoSimple medio, TercetoSimple der, int aux,  int numeroTerceto) {
+    public Terceto(TercetoSimple izq, TercetoSimple medio, TercetoSimple der, int numeroTerceto) {
         elementos = new ArrayList<TercetoSimple>();
         elementos.add(izq);
         elementos.add(medio);
         elementos.add(der);
-        varAux=aux;
         this.numeroTerceto = numeroTerceto;
 
     }
@@ -39,7 +37,7 @@ public abstract class Terceto {
             else
                 terceto = terceto + ")";
         }
-        return terceto+" - "+varAux;
+        return terceto;
     }
 
     public void setElemento(int index, TercetoSimple t){
@@ -57,6 +55,6 @@ public abstract class Terceto {
         this.controladorTercetos = controladorTercetos;
     }
 
-    public abstract String getAssembler();
+    //public abstract String getAssembler();
 }
 

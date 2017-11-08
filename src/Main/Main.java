@@ -15,6 +15,8 @@ import AnalizadorLexico.ControladorArchivo;
 import AnalizadorLexico.TablaSimbolos;
 import AnalizadorSintactico.AnalizadorSintactico;
 import AnalizadorSintactico.Parser;
+import CodigoIntermedio.AnalizadorCodigoIntermedio;
+import CodigoIntermedio.ControladorTercetos;
 
 
 public class Main {
@@ -42,7 +44,7 @@ public class Main {
         return buffer;
     }
     public static void main (String [] args) {
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\"+args[0]);
+        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG7\n");
@@ -55,11 +57,15 @@ public class Main {
         TablaSimbolos ts = new TablaSimbolos();
         AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivo,ts);
         AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico();
+        AnalizadorCodigoIntermedio analizadorCodigoIntermedio = new AnalizadorCodigoIntermedio();
+        ControladorTercetos controladorTercetos = new ControladorTercetos();
 
 
         Parser parser;
         parser = new Parser();
         parser.setLexico(analizadorLexico);
+        parser.setCodigoIntermedio(analizadorCodigoIntermedio);
+        parser.setControladorTercetos(controladorTercetos);
         parser.setTS(ts);
         parser.setSintactico(analizadorSintactico);
         parser.setControladorArchivo(archivo);
@@ -72,5 +78,10 @@ public class Main {
         System.out.println(analizadorLexico.mostrarErrorComp());
         System.out.println(analizadorSintactico.getErroresSint());
         System.out.println(analizadorSintactico.getEstructuras());
+        System.out.println(analizadorCodigoIntermedio.getErroresCI());
+        if ( analizadorCodigoIntermedio.hayErrores() || analizadorLexico.hayErrores() || analizadorSintactico.hayErrores() )
+            System.out.println( "No se genera codigo intermedio por errores en el codigo" );
+        else
+            System.out.println( controladorTercetos.imprimirTercetos() );
     }
 }

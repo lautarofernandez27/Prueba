@@ -72,7 +72,7 @@ public class CeldaAS extends CeldaABS{
                     }
                 }
 
-                //Si es un ID o Cadena va a la tabla de simbolos
+                //Si es una Cadena va a la tabla de simbolos
                 if(tablaSimb.es_Agregable(t))
                     tablaSimb.addSimbolo(t);
 

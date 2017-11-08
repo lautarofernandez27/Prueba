@@ -9,6 +9,9 @@ public class Token {
     //LONG, FLOAT
     String tipo="";
 
+    //booleano que indica si el token es un numero de terceto o realmente un token
+    boolean numTerceto=false;
+
     //ID, CTE
     String lexema;
 
@@ -22,7 +25,7 @@ public class Token {
         this.nombre = nombre;
         this.uso = uso;
 
-        if ( (uso>=analizador.IF) && (uso<=analizador.L_D) )
+        if ( (uso>=analizador.IF) && (uso<=analizador.L_F) )
             lexema = "Palabra reservada";
         else
         if (uso==analizador.ID)
@@ -54,10 +57,18 @@ public class Token {
         else
             lexema = "Simbolo";
     }
+    public boolean isNumTerceto(){
+        return numTerceto;
+    }
+
+    public void setNumTerceto(boolean numTerceto){
+        this.numTerceto= numTerceto;
+    }
 
     public Token(String numeroTercetoString) {
         // Usado para los tercetos
         nombre = numeroTercetoString;
+        numTerceto=true;
     }
 
 
@@ -88,6 +99,10 @@ public class Token {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNegativo(){
+        nombre= "-"+nombre;
     }
 
     public void setNombre(String nombre) {

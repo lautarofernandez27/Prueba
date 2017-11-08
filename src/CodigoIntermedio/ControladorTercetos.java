@@ -6,6 +6,11 @@ import AnalizadorLexico.Token;
 import java.util.ArrayList;
 
 public class ControladorTercetos {
+
+    public static final String BF = "BF";
+    public static final String BI = "BI";
+
+
     private ArrayList<Terceto> tercetos;
     private ArrayList<Integer> pila;
     private ArrayList<Integer> labelPendientes; // por el tema del if
@@ -69,16 +74,28 @@ public class ControladorTercetos {
         pila.add(new Integer(tercetos.size()-1) );
     }
 
+    public void apilarControl() {pila.add(new Integer(tercetos.size())); }
+
     public void desapilar(){
         int tercetoMod = pila.get(pila.size()-1);
         pila.remove(pila.size()-1);
         Terceto nuevo = tercetos.get(tercetoMod);
-        TercetoSimple add = new TercetoSimple(new Token( String.valueOf(tercetos.size()+1) ) );
+        Token t = new Token( String.valueOf(tercetos.size()+1) );
+        t.setNumTerceto(false);
+        TercetoSimple add = new TercetoSimple(t);
         if (nuevo.getTerceto(1) == null)
             nuevo.setElemento(1, add);
         else
             nuevo.setElemento(2, add);
         tercetos.set(tercetoMod, nuevo);
+    }
+
+    public void desapilarControl(){
+        Terceto nuevo = tercetos.get(tercetos.size()-1);
+        Token t = new Token( String.valueOf(pila.remove(pila.size()-1)) );
+        t.setNumTerceto(false);
+        TercetoSimple add = new TercetoSimple(t);
+        nuevo.setElemento(1, add);
     }
 
     public ArrayList<Terceto> getTercetos() {
