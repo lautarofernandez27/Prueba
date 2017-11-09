@@ -6,7 +6,9 @@ public class TercetoEtiqueta extends Terceto {
         super(izq, medio, der, numeroTerceto);
     }
 
-    public String getAsembler(){
+    @Override
+    public String getAssembler() {
         return "label"+numeroTerceto+":"+"\n";
     }
+
 }

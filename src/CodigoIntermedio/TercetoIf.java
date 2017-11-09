@@ -6,4 +6,9 @@ public class TercetoIf extends Terceto {
         super(izq, medio, der, numeroTerceto);
         // TODO Auto-generated constructor stub
     }
+
+    @Override
+    public String getAssembler() {
+        return null;
+    }
 }

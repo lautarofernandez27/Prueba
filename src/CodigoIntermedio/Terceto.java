@@ -55,6 +55,6 @@ public abstract class Terceto {
         this.controladorTercetos = controladorTercetos;
     }
 
-    //public abstract String getAssembler();
+    public abstract String getAssembler();
 }
 

@@ -17,6 +17,11 @@ public class TercetoExpresion extends Terceto {
         super(izq, medio, der,  numeroTerceto);
     }
 
+    @Override
+    public String getAssembler() {
+        return null;
+    }
+
 
     private String convertirOperador(String op){
         if (op == "+") return "ADD";
