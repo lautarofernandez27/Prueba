@@ -304,7 +304,9 @@ factor   :  CTEF{  Token t= (Token) $1.obj;
 
          ;
 
-out  :    OUT '('   CADENA   ')'  '.'  {
+out  :    OUT '('   CADENA   ')'  '.'  {TercetoPrint terceto = new TercetoPrint ( new TercetoSimple( (Token)$1.obj ),new TercetoSimple( (Token)$3.obj ), null, controladorTercetos.getProxNumero() );
+                                        controladorTercetos.addTerceto (terceto);
+                                        //controladorTercetos.addPrint( ((Token)$3.obj).getNombre() );
                                       analizadorS.addEstructura (new Error ( analizadorS.estructuraOUT,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
 
     }

@@ -1,14 +1,1 @@
-a,b:LONG.
-WHILE (a==b)DO
-    IF (a==b) THEN
-        BEGIN
-            a=4,5.
-            b=a.
-            b=a+b.
-        END.
-    ELSE
-        a=1.
-    END_IF
-.
-a:LONG.
-a=b.
+OUT('Hola Mundo').
