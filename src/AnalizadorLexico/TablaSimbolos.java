@@ -5,8 +5,12 @@ import java.util.Hashtable;
 
 public class TablaSimbolos {
 
+    public static final String dieciseis = "dw";
+    public static final String tipoPrint = "db";
+    public static final String trentaydosBits = "dd";
     private Hashtable<String, Token> tSimb;
 
+    ArrayList<Token> prints = new ArrayList<Token>();
 
     public TablaSimbolos(){
         tSimb = new Hashtable<>();
@@ -64,5 +68,56 @@ public class TablaSimbolos {
     };
 
 
+    public ArrayList<Token> getPrints() {
+        System.out.println("getPrint");
+        ArrayList<Token> tokens =getTokens();
+        for (Token t: tokens){
+            if ( ( t.getUso() == AnalizadorLexico.CADENA) && (!estaPrint(t) ) )
+                prints.add(t);
+        }
+        return prints;
+    }
+
+    private boolean estaPrint(Token token) {
+        for (Token t : prints)
+            if (t.getNombre().equals(token.getNombre()))
+                return true;
+        return false;
+    }
+
+
+    public String getAssembler (){
+        ArrayList<Token> tokens = getTokens();
+        String assembler = "";
+        for (Token t: tokens){
+            if  ( (t.getUso() != AnalizadorLexico.CTEL) /*PREGUNTAR PARA FLOAT*/){
+                String tipoAssembler = getTipoAssember(t);
+
+                //Si es un comentario es distinto ya que se hace print1 + el assembler xq
+                // t.getNombre() retornaria "'comentario'" entre comillas y generaria un error en el ASM
+
+                if(t.getUso() != AnalizadorLexico.CADENA)
+                    assembler = assembler + t.getNombre()+ " " + tipoAssembler + '\n';
+            }
+        }
+        return assembler;
+    }
+
+
+    public String getTipoAssember(Token t) {
+        String tipo = "";
+        AnalizadorLexico analizador = new AnalizadorLexico(null, null); //es para usar las constantes
+
+                if ( t.getTipo() == analizador.variableL ){
+            tipo = trentaydosBits;
+        }
+        else
+        if( t.getUso() == analizador.CADENA){
+            //Se lleva una cuenta de la posicion del print para luego
+            //coordinar con los tercetos la posicion.
+            tipo = "print" +String.valueOf(prints.indexOf(t)+1) +" " +tipoPrint +" " +t.nombre  +"," ;
+        }
+        return tipo + "0";//inicializo en cero todas las variables
+    }
 
 }

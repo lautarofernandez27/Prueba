@@ -1,6 +1,10 @@
 package CodigoIntermedio;
 
 public class TercetoComparacion extends Terceto {
+    @Override
+    public String getAssembler() {
+        return null;
+    }
 
     public final static String CMP = "CMP";
     public static final String etiquetaIgual = "JE";

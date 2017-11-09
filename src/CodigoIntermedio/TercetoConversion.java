@@ -6,5 +6,10 @@ public class TercetoConversion extends Terceto {
         super(izq, medio, der,  numeroTerceto);
     }
 
+    @Override
+    public String getAssembler() {
+        return null;
+    }
+
 
 }

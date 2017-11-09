@@ -17,6 +17,7 @@ import AnalizadorSintactico.AnalizadorSintactico;
 import AnalizadorSintactico.Parser;
 import CodigoIntermedio.AnalizadorCodigoIntermedio;
 import CodigoIntermedio.ControladorTercetos;
+import CodigoIntermedio.ConvertidorAssembler;
 
 
 public class Main {
@@ -43,10 +44,10 @@ public class Main {
         }
         return buffer;
     }
-    public static void main (String [] args) {
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
+    public static void main (String [] args) throws IOException {
+        //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
-        //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
+        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG7\n");
@@ -61,7 +62,8 @@ public class Main {
         AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico();
         AnalizadorCodigoIntermedio analizadorCodigoIntermedio = new AnalizadorCodigoIntermedio();
         ControladorTercetos controladorTercetos = new ControladorTercetos();
-
+        ConvertidorAssembler convertidorAssembler = new ConvertidorAssembler(controladorTercetos);
+        convertidorAssembler.setTablaSimb(ts);
 
         Parser parser;
         parser = new Parser();
@@ -85,5 +87,7 @@ public class Main {
             System.out.println( "No se genera codigo intermedio por errores en el codigo" );
         else
             System.out.println( controladorTercetos.imprimirTercetos() );
+            convertidorAssembler.generarAssembler();
+            System.out.println( convertidorAssembler.generarArchivo() );
     }
 }

@@ -24,8 +24,8 @@ public class ControladorTercetos {
         tercetos = new ArrayList<Terceto>();
         pila = new ArrayList<Integer>();
         labelPendientes = new ArrayList<Integer>();
-        prints = new ArrayList<Token>();
         tablaSimbolos = null;
+        prints = new ArrayList<Token>();
     }
 
     public String imprimirTercetos() {
@@ -107,7 +107,7 @@ public class ControladorTercetos {
         return tercetos.get(index-1);
     }
 
-    /*public String generarAssembler() {
+    public String generarAssembler() {
         String assembler = "";
 
         num_terceto_actual = 1; //numero de terceto para colocar el label
@@ -115,17 +115,15 @@ public class ControladorTercetos {
 
             t.setControladorTercetos(this);
             assembler = assembler + t.getAssembler();
-            //assembler_l.add(t.getAssembler());
 
             num_terceto_actual++;
             if ( (!labelPendientes.isEmpty()) && ( num_terceto_actual == labelPendientes.get(labelPendientes.size()-1) ) ){
                 assembler = assembler + "Label" + String.valueOf(labelPendientes.get(labelPendientes.size()-1))+ ":" + '\n';
-                //assembler_l.add("Label"+String.valueOf(labelPendientes.get(labelPendientes.size()-1))+"\n");
                 borrarLabelPendiente();
             }
         }
         return assembler;
-    }*/
+    }
 
     public int getNumTercetoActual(){
         return num_terceto_actual;
@@ -134,25 +132,25 @@ public class ControladorTercetos {
     //Informa que se agrego un terceto de print y modifica el ultimo terceto para coordinar
     //el nombre con el .datat del ASM
     //FIJARSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    /*
+
     public void addPrint(String nombre){
         prints = tablaSimbolos.getPrints();
         for (int i=0; i<prints.size(); i++)
             if ( prints.get(i).getNombre() == nombre)
                 ((TercetoPrint)tercetos.get(tercetos.size()-1)).setPrint(String.valueOf(i+1));
     }
-    */
+
 
     public void setTablaSimbolos(TablaSimbolos tablaSimbolos) {
         this.tablaSimbolos = tablaSimbolos;
     }
 
-    /*public String getPrintsAssembler(){
+    public String getPrintsAssembler(){
         String assembler = "";
         for (Token t:prints)
             assembler = assembler + tablaSimbolos.getTipoAssember(t) + '\n';
         return assembler;
-    }*/
+    }
 
 
 }

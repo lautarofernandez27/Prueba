@@ -1,8 +1,9 @@
 package CodigoIntermedio;
 
-public class TercetoIf extends Terceto {
+public class TercetoLabel extends  Terceto {
 
-    public TercetoIf(TercetoSimple izq, TercetoSimple medio,	TercetoSimple der, int numeroTerceto) {
+
+    public TercetoLabel(TercetoSimple izq, TercetoSimple medio,	TercetoSimple der, int numeroTerceto) {
         super(izq, medio, der, numeroTerceto);
         // TODO Auto-generated constructor stub
     }
