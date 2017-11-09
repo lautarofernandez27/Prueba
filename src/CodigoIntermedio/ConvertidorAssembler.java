@@ -77,14 +77,8 @@ public class ConvertidorAssembler {
         data = data + controladorTercetos.getPrintsAssembler();
         data = data + "DividirCero db \"Error al dividir por cero!\", 0" + '\n';
         data = data + "errorPerdida db \"Hay perdida de informacion a la hora de realizar una asignacion\", 0" + '\n';
-        data = data + "FueraRango db \"Se intento acceder a una posicion de la matriz fuera del rango!\", 0" + '\n';
-        data = data + "matrix dd 0" +"\n";
 //		data = data + controladorTercetos.getVarAux();
         data = data + '\n' + ".code"+ "\n";
-
-        //matrix es una variable auxiliar para las matrices.
-        //le puse este nombre xq es una palabra reservada.
-        //entonces me aseguro de nunca verla en el assembler (espero)
 
         bw.write( data );
 
@@ -109,8 +103,6 @@ public class ConvertidorAssembler {
         errores = errores + "invoke MessageBox, NULL, addr errorPerdida, addr errorPerdida, MB_OK" + '\n';
         errores = errores + "invoke ExitProcess, 0" + '\n';
         errores = errores + labelFueraRango + ":" + '\n';
-        errores = errores + "invoke MessageBox, NULL, addr FueraRango, addr FueraRango, MB_OK" + '\n';
-        errores = errores + "invoke ExitProcess, 0" + '\n';
         return errores;
     }
 
