@@ -98,6 +98,7 @@ public class ControladorTercetos {
         nuevo.setElemento(1, add);
     }
 
+
     public ArrayList<Terceto> getTercetos() {
         return tercetos;
     }
