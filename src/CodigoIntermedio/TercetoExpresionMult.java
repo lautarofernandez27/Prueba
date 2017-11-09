@@ -13,7 +13,7 @@ public class TercetoExpresionMult extends TercetoExpresion {
     public String getAssembler() {
 
         String assembler = "";
-        Terceto terceto1 = null;
+       /* Terceto terceto1 = null;
         if (!elementos.get(1).esToken())
             terceto1 = controladorTercetos.getTerceto( Integer.parseInt( elementos.get(1).getNombreVar() ) );
         Terceto terceto2 = null;
@@ -77,7 +77,7 @@ public class TercetoExpresionMult extends TercetoExpresion {
                 assembler =  assembler + MOV + " " + registro +", " + registroAX  + '\n';
 
                 controladorTercetos.liberarRegistro(registroAX);
-            }
+            }*/
         return assembler;
     }
 

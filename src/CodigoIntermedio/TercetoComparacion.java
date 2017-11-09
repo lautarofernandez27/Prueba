@@ -1,5 +1,7 @@
 package CodigoIntermedio;
 
+import AnalizadorLexico.AnalizadorLexico;
+
 public class TercetoComparacion extends Terceto {
     @Override
     public String getAssembler() {
@@ -37,7 +39,7 @@ public class TercetoComparacion extends Terceto {
             assembler = assembler + "MOV" + " " +  registro1 + ", " + elementos.get(1).getNombreVar()+ '\n';
             assembler = assembler + "MOV" + " " +  registro2 + ", " + elementos.get(2).getNombreVar()+ '\n';
 
-            if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
+            if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
                 assembler = assembler + crearAssemblerConversionVar(registro1,1);
                 registro1=registroAux;
             }

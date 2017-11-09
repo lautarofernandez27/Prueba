@@ -1,1 +1,3 @@
+a:LONG.
 OUT('Hola Mundo').
+OUT('Facundo').
