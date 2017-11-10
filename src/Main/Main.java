@@ -45,9 +45,9 @@ public class Main {
         return buffer;
     }
     public static void main (String [] args) throws IOException {
-        String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
+        //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
-        //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
+        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG7\n");
