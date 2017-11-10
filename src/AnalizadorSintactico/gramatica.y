@@ -111,7 +111,7 @@ asignacion  : ID  '=' expresion'.'{  analizadorS.addEstructura (new Error ( anal
 									Token t2 = (Token) $3.obj;
 									if ( (t1 != null) && (t2 != null) ){
 										if(!tipoCompatible(t1,t2))
-											analizadorCI.addError (new Error ( analizadorCI.errorFaltaAllow,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
+											analizadorCI.addError (new Error ( analizadorCI.errorFaltaL_F,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
 									}
                                     TercetoAsignacion terceto = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple(t),  new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
                                     controladorTercetos.addTerceto (terceto);
@@ -130,7 +130,7 @@ expresion  :  expresion '+'  termino{	String valor ="+";
                                             TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("+",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
                                             controladorTercetos.addTerceto (terceto);
                                             Token nuevo = new Token( controladorTercetos.numeroTercetoString());
-                                            nuevo.setTipo(tipo);
+                                            nuevo.setTipo(((Token)$1.obj).getTipo());
                                             $$ = new ParserVal(nuevo);
                                         }
                                         else
@@ -142,7 +142,7 @@ expresion  :  expresion '+'  termino{	String valor ="+";
                                     	    TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("-",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
                                     	    controladorTercetos.addTerceto (terceto);
                                     	    Token nuevo = new Token( controladorTercetos.numeroTercetoString());
-                                    	    nuevo.setTipo(tipo);
+                                    	    nuevo.setTipo(((Token)$1.obj).getTipo());
                                     	    $$ = new ParserVal(nuevo);
                                     	}
                                     	else

@@ -33,7 +33,7 @@ public class AnalizadorSintactico {
     static final String errorDosPuntos = "Error: quiso poner ':'";
     static final String faltaThen = "Se esperaba la palabra THEN";
     static final String faltaDO = "Se esperaba la palabra DO";
-    static final String tiposCompatibles = "Los tipos no son compatibles";
+    static final String errorTiposCompatibles = "Los tipos no son compatibles";
     static final String errorEND = "No se coloco END para finalizar el bloque de sentencias";
     static final String errorBEGIN = "No se coloco BEGIN para iniciar el bloque de sentencias";
     static final String errorDeclaracionDentroDeControl = "No se pueden declarar variables dentro de un bloque de control";

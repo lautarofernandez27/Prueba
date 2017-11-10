@@ -1,4 +1,4 @@
-a:LONG.
+a:FLOAT.
 b:FLOAT.
 IF (a<b) THEN
     OUT('jajaja').
