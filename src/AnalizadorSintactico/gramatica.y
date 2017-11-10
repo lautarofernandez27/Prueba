@@ -126,20 +126,22 @@ asignacion  : ID  '=' expresion'.'{  analizadorS.addEstructura (new Error ( anal
             ;
 
 expresion  :  expresion '+'  termino{	String valor ="+";
-                                        String tipo = getTipoCompatibleSuma((Token)$1.obj,(Token)$3.obj);
-                                        TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("+",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
-                                        controladorTercetos.addTerceto (terceto);
-                                        Token nuevo = new Token( controladorTercetos.numeroTercetoString());
-                                        nuevo.setTipo(tipo);
-                                        $$ = new ParserVal(nuevo);
+                                        if (tipoCompatible ((Token)$1.obj,(Token)$3.obj)){
+                                            TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("+",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
+                                            controladorTercetos.addTerceto (terceto);
+                                            Token nuevo = new Token( controladorTercetos.numeroTercetoString());
+                                            nuevo.setTipo(tipo);
+                                            $$ = new ParserVal(nuevo);
+                                        }
                                                                         									}
            |  expresion '-'  termino{	String valor ="-";
-                                        String tipo = getTipoCompatibleSuma((Token)$1.obj,(Token)$3.obj);
-                                    	TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("-",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
-                                    	controladorTercetos.addTerceto (terceto);
-                                    	Token nuevo = new Token( controladorTercetos.numeroTercetoString());
-                                    	nuevo.setTipo(tipo);
-                                    	$$ = new ParserVal(nuevo);
+                                       if (tipoCompatible ((Token)$1.obj,(Token)$3.obj)){
+                                    	    TercetoExpresion terceto = new TercetoExpresion ( new TercetoSimple( new Token("-",(int) valor.charAt(0) ) ),new TercetoSimple( (Token)$1.obj ), new TercetoSimple( (Token)$3.obj ), controladorTercetos.getProxNumero() );
+                                    	    controladorTercetos.addTerceto (terceto);
+                                    	    Token nuevo = new Token( controladorTercetos.numeroTercetoString());
+                                    	    nuevo.setTipo(tipo);
+                                    	    $$ = new ParserVal(nuevo);
+                                    	}
                                     									}
            |  L_F '(' expresion ')' {   TercetoConversion terceto = new TercetoConversion (new TercetoSimple (new Token ("ltof",analizadorL.L_F)),new TercetoSimple((Token)$3.obj),null,controladorTercetos.getProxNumero());
                                         controladorTercetos.addTerceto (terceto);
@@ -475,12 +477,12 @@ public void setControladorArchivo ( ControladorArchivo ca){
 
 public boolean tipoCompatible(Token t1, Token t2){
 
-if(t1.getTipo()!=null && t2.getTipo()!=null){
-		if(t1.getTipo().equals("long") && (t2.getTipo().equals("float")))
-				return false;
-		return true;
-}
-		return false;
+    if(t1.getTipo()!=null && t2.getTipo()!=null){
+            if(t1.getTipo().equals(t2.getTipo()))
+                    return true;
+            return false;
+    }
+            return false;
 }
 public void setTS (TablaSimbolos ts){
 	tablaSimbolo = ts;
