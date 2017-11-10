@@ -7,7 +7,7 @@ import AnalizadorLexico.Error;
 public class AnalizadorCodigoIntermedio {
 
     public static final String errorNoExisteVariable = "Esta variable no fue declarada";
-    public static final String errorFaltaAllow= "no se puede convertir de integer a longint si no esta la declaracion ALLOW LONGINT TO INTEGER";
+    public static final String errorFaltaL_F= "TIPOS INCOMPATIBLES";
     public static final String errorVariableControlFOR = "No se actualiza la variable de control en el for.";
 
 
