@@ -133,6 +133,9 @@ expresion  :  expresion '+'  termino{	String valor ="+";
                                             nuevo.setTipo(tipo);
                                             $$ = new ParserVal(nuevo);
                                         }
+                                        else
+                                                                                        analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
                                                                         									}
            |  expresion '-'  termino{	String valor ="-";
                                        if (tipoCompatible ((Token)$1.obj,(Token)$3.obj)){
@@ -142,6 +145,9 @@ expresion  :  expresion '+'  termino{	String valor ="+";
                                     	    nuevo.setTipo(tipo);
                                     	    $$ = new ParserVal(nuevo);
                                     	}
+                                    	else
+                                                                                         analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
                                     									}
            |  L_F '(' expresion ')' {   TercetoConversion terceto = new TercetoConversion (new TercetoSimple (new Token ("ltof",analizadorL.L_F)),new TercetoSimple((Token)$3.obj),null,controladorTercetos.getProxNumero());
                                         controladorTercetos.addTerceto (terceto);
@@ -170,12 +176,17 @@ termino  :  termino '*'  factor   {
                                                  if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())==CeldaAS.maximoL+1)){
                                                                                                             analizadorL.addError(new Error(analizadorL.ErrorC,"Lexico",controladorArchivo.getLinea()));
                                                                                                         }
-                                           String simb= "*";
-                                           TercetoExpresionMult  terceto = new TercetoExpresionMult (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple ((Token)$3.obj),controladorTercetos.getProxNumero());
-                                           controladorTercetos.addTerceto (terceto);
-                                           Token nuevo = new Token (controladorTercetos.numeroTercetoString());
-                                           nuevo.setTipo(((Token)$1.obj).getTipo());
-                                           $$ = new ParserVal(nuevo);
+                                           if (tipoCompatible ((Token)$1.obj,(Token)$3.obj)){
+                                                String simb= "*";
+                                                TercetoExpresionMult  terceto = new TercetoExpresionMult (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple ((Token)$3.obj),controladorTercetos.getProxNumero());
+                                                controladorTercetos.addTerceto (terceto);
+                                                Token nuevo = new Token (controladorTercetos.numeroTercetoString());
+                                                nuevo.setTipo(((Token)$1.obj).getTipo());
+                                                $$ = new ParserVal(nuevo);
+                                           }
+                                           else
+                                                analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
 
                                      }
          |  termino '*' '-' factor  {
@@ -191,14 +202,21 @@ termino  :  termino '*'  factor   {
                                            t.setTipo(tokenFactor.getTipo());
                                            tablaSimbolo.addSimbolo(t);
                                          }
-                                       String simb= "*";
-                                       Token negativo = (Token)$4.obj;
-                                       negativo.setNegativo();
-                                       TercetoExpresionMult  terceto = new TercetoExpresionMult (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple (negativo),controladorTercetos.getProxNumero());
-                                       controladorTercetos.addTerceto (terceto);
-                                       Token nuevo = new Token (controladorTercetos.numeroTercetoString());
-                                       nuevo.setTipo(((Token)$1.obj).getTipo());
-                                       $$ = new ParserVal(nuevo);
+
+                                       if (tipoCompatible ((Token)$1.obj,(Token)$4.obj)){
+                                         String simb= "*";
+                                         Token negativo = (Token)$4.obj;
+                                        negativo.setNegativo();
+                                        TercetoExpresionMult  terceto = new TercetoExpresionMult (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple (negativo),controladorTercetos.getProxNumero());
+                                         controladorTercetos.addTerceto (terceto);
+                                          Token nuevo = new Token (controladorTercetos.numeroTercetoString());
+                                         nuevo.setTipo(((Token)$1.obj).getTipo());
+                                          $$ = new ParserVal(nuevo);
+                                       }
+                                       else
+                                                                                       analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
+
                                    }
          |  termino '/' factor   {
                                      Token tokenFactor= (Token) $3.obj;
@@ -217,13 +235,17 @@ termino  :  termino '*'  factor   {
                                        if ((tokenFactor.getLexema().equals("Constante long")) && (Long.parseLong(tokenFactor.getNombre())==CeldaAS.maximoL+1)){
                                                                                                   analizadorL.addError(new Error(analizadorL.ErrorC,"Lexico",controladorArchivo.getLinea()));
                                                                                               }
-                                      String simb= "/";
-                                      //String tipo = getTipoCompatibleDivision((Token)$1.obj,(Token)$3.obj);
-                                      TercetoExpresionDiv  terceto = new TercetoExpresionDiv (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple ((Token)$3.obj),controladorTercetos.getProxNumero());
-                                      controladorTercetos.addTerceto (terceto);
-                                      Token nuevo = new Token (controladorTercetos.numeroTercetoString());
-                                      nuevo.setTipo(((Token)$1.obj).getTipo());
-                                      $$ = new ParserVal(nuevo);
+                                      if (tipoCompatible ((Token)$1.obj,(Token)$3.obj)){
+                                         String simb= "/";
+                                        TercetoExpresionDiv  terceto = new TercetoExpresionDiv (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple ((Token)$3.obj),controladorTercetos.getProxNumero());
+                                         controladorTercetos.addTerceto (terceto);
+                                         Token nuevo = new Token (controladorTercetos.numeroTercetoString());
+                                         nuevo.setTipo(((Token)$1.obj).getTipo());
+                                         $$ = new ParserVal(nuevo);
+                                      }
+                                      else
+                                                                                      analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
                                  }
          |  termino '/' '-' factor  {
                                         Token tokenFactor= (Token) $4.obj;
@@ -238,15 +260,20 @@ termino  :  termino '*'  factor   {
                                                   t.setTipo(tokenFactor.getTipo());
                                                   tablaSimbolo.addSimbolo(t);
                                               }
-                                        String simb= "/";
-                                        Token negativo = (Token)$4.obj;
-                                        negativo.setNegativo();
-                                        //String tipo = getTipoCompatibleDivision((Token)$1.obj,(Token)$3.obj);
-                                        TercetoExpresionDiv  terceto = new TercetoExpresionDiv (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple (negativo),controladorTercetos.getProxNumero());
-                                        controladorTercetos.addTerceto (terceto);
-                                        Token nuevo = new Token (controladorTercetos.numeroTercetoString());
-                                        nuevo.setTipo(((Token)$1.obj).getTipo());
-                                        $$ = new ParserVal(nuevo);
+
+                                        if (tipoCompatible ((Token)$1.obj,(Token)$4.obj)){
+                                             String simb= "/";
+                                                Token negativo = (Token)$4.obj;
+                                            negativo.setNegativo();
+                                             TercetoExpresionDiv  terceto = new TercetoExpresionDiv (new TercetoSimple (new Token (simb, (int)simb.charAt(0))), new TercetoSimple ((Token)$1.obj),new TercetoSimple (negativo),controladorTercetos.getProxNumero());
+                                              controladorTercetos.addTerceto (terceto);
+                                              Token nuevo = new Token (controladorTercetos.numeroTercetoString());
+                                             nuevo.setTipo(((Token)$1.obj).getTipo());
+                                              $$ = new ParserVal(nuevo);
+                                        }
+                                        else
+                                                                                        analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
+
                                      }
          |  factor      {
                             Token tokenFactor= (Token) $1.obj;

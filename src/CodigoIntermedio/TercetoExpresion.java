@@ -13,6 +13,7 @@ public class TercetoExpresion extends Terceto {
 
 
 
+
     public TercetoExpresion(TercetoSimple izq, TercetoSimple medio,	TercetoSimple der, int numeroTerceto) {
         super(izq, medio, der,  numeroTerceto);
     }

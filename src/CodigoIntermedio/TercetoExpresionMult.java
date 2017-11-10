@@ -24,9 +24,23 @@ public class TercetoExpresionMult extends TercetoExpresion {
         //caso 1: (OP, variable, variable)
         if ( ( elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
 
-            assembler = assembler + "MOV " + reg3Long + ", " + elementos.get(1).getNombreVar() + '\n';
+            if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-            assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
+                assembler = assembler + MOV + reg3Long + "," + elementos.get(1).getNombreVar() + '\n';
+
+                assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
+
+                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+
+
+            }
+            else if (elementos.get(1).getToken().getTipo().equals("float")) {
+                assembler = assembler + "FLD " + elementos.get(1).getNombreVar() + '\n';
+
+                assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
+
+                assembler = assembler + "F"
+            }
         }
         return assembler;
     }

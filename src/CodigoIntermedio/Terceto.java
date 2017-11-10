@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public abstract class Terceto {
 
+    public static final String AUX = "@aux";
     public static final String reg2Integer = "BX";
     public static final String reg2Long = "EBX";
     public static final String reg1Integer = "CX";
@@ -11,6 +12,15 @@ public abstract class Terceto {
     public static final String reg3Long = "EAX";
     public static final String reg4Integer = "DX";
     public static final String reg4Long = "EDX";
+    public static final String ST = "ST";
+    public static final String ST1 = "ST(1)";
+    public static final String ST2 = "ST(2)";
+    public static final String ST3 = "ST(3)";
+    public static final String ST4 = "ST(4)";
+    public static final String ST5 = "ST(5)";
+    public static final String ST6 = "ST(6)";
+    public static final String ST7 = "ST(7)";
+
 
 
     protected ArrayList<TercetoSimple> elementos;

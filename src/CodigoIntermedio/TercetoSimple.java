@@ -25,8 +25,7 @@ public class TercetoSimple {
     }
 
     public boolean esToken(){
-        char c = t.getNombre().charAt(0);
-        return (!Character.isDigit(c) );
+        return (!t.isNumTerceto() );
     }
 
     public int getNumeroTerceto(){
