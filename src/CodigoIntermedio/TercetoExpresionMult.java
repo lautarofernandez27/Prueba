@@ -39,7 +39,9 @@ public class TercetoExpresionMult extends TercetoExpresion {
 
                 assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
 
-                assembler = assembler + "F"
+                assembler = assembler + "FMUL" + '\n';
+
+                assembler = assembler + "FST" + AUX + numeroTerceto + '\n';
             }
         }
         return assembler;
