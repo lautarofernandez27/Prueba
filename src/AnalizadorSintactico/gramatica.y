@@ -368,7 +368,7 @@ let  :    LET  asignacion   {
 
 
 if_condicion : IF  '(' condicion ')' THEN  {	TercetoIf terceto = new TercetoIf ( new TercetoSimple( (new Token( controladorTercetos.BF) ) ), new TercetoSimple(new Token( controladorTercetos.numeroTercetoString() ) ), null, controladorTercetos.getProxNumero() );
-                                           		//terceto.setTipoSalto(((Token)$3.obj).getNombre());
+                                           		terceto.setTipoSalto(((Token)$3.obj).getNombre());
                                            		controladorTercetos.addTerceto (terceto);
                                            		controladorTercetos.apilar();
                                            	}

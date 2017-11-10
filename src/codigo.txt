@@ -1,5 +1,5 @@
 a:FLOAT.
 b:FLOAT.
-IF (a<b) THEN
+IF (2<3) THEN
     OUT('jajaja').
-ENDIF.
+END_IF
