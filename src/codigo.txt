@@ -1,3 +1,5 @@
 a:LONG.
-OUT('Hola Mundo').
-OUT('Facundo').
+b:FLOAT.
+IF (a<b) THEN
+    OUT('jajaja').
+ENDIF.
