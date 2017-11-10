@@ -49,18 +49,18 @@ public class TercetoComparacion extends Terceto {
         }
         else
             //caso 2: (OP, registro, variable)
-            if ( ( !elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ){
-                if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
-                    assembler = assembler + "MOV " + reg3Long +" , "+elementos.get(2).getNombreVar()+'\n';
-                    assembler = assembler + CMP + " " + AUX+terceto1.getPosicionTerceto()+","+ reg3Long+ '\n';
-                }
-                else
-                if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
-                    assembler = assembler + "FLD " + AUX+terceto1.getPosicionTerceto() + '\n';
-                    assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
-                    assembler = assembler + "FCOM" + '\n';
-                }
+        if ( ( !elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ){
+            if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
+                assembler = assembler + "MOV " + reg3Long +" , "+elementos.get(2).getNombreVar()+'\n';
+                assembler = assembler + CMP + " " + AUX+terceto1.getPosicionTerceto()+","+ reg3Long+ '\n';
             }
+            else
+            if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
+                assembler = assembler + "FLD " + AUX+terceto1.getPosicionTerceto() + '\n';
+                assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
+                assembler = assembler + "FCOM" + '\n';
+            }
+        }
 
         else
         //caso 3: (OP, registro, registro)
@@ -70,14 +70,13 @@ public class TercetoComparacion extends Terceto {
                 assembler = assembler + "MOV " +AUX+terceto2.getPosicionTerceto()+","+elementos.get(2).getNombreVar()+'\n';
                 assembler = assembler + CMP + " " +AUX+terceto1.getPosicionTerceto()+","+AUX+terceto2.getPosicionTerceto()+'\n';
             }
-
             else
-            if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableI)) )
-                assembler = assembler + crearAssemblerConversion(terceto2,2);
-            assembler = assembler + CMP  + " " + terceto1.getRegistro() + ", " + terceto2.getRegistro() + '\n';
-            controladorTercetos.liberarRegistro(terceto1.getRegistro());
-            controladorTercetos.liberarRegistro(terceto2.getRegistro());
-        }
+            if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
+                assembler = assembler + "FLD " + AUX+terceto1.getPosicionTerceto() + '\n';
+                assembler = assembler + "FLD " + AUX+terceto2.getPosicionTerceto() + '\n';
+                assembler = assembler + "FCOM" + '\n';
+            }
+        }/*
         else
             //caso 4: (OP, variable, registro)
             if ( ( elementos.get(1).esToken() ) && ( !elementos.get(2).esToken() ) ){
