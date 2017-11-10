@@ -1,14 +1,18 @@
 package CodigoIntermedio;
 
+import AnalizadorLexico.AnalizadorLexico;
+
 public class TercetoComparacion extends Terceto {
-    @Override
-    public String getAssembler() {
-        return null;
-    }
 
     public final static String CMP = "CMP";
     public static final String etiquetaIgual = "JE";
+    public static final String etiquetaMenor = "JB";
+    public static final String etiquetaMayor = "JG";
+    public static final String etiquetaMayorIgual = "JGE";
+    public static final String etiquetaMenorIgual = "JBE";
+
     public static final String etiquetaDistinto = "JNE";
+
     private String registroAux = new String();
 
 
@@ -17,7 +21,7 @@ public class TercetoComparacion extends Terceto {
         // TODO Auto-generated constructor stub
     }
 
-/*
+
     public String getAssembler() {
         String assembler = "";
         String operador = elementos.get(0).getNombreVar();
@@ -30,14 +34,25 @@ public class TercetoComparacion extends Terceto {
 
 
         //caso 1: (OP, variable, variable)
-        if ( ( elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ){
-            String registro1 = controladorTercetos.getProxRegLibre( elementos.get(1).getToken() );
-            String registro2 = controladorTercetos.getProxRegLibre( elementos.get(2).getToken() );
+        if ( ( elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
 
-            assembler = assembler + "MOV" + " " +  registro1 + ", " + elementos.get(1).getNombreVar()+ '\n';
-            assembler = assembler + "MOV" + " " +  registro2 + ", " + elementos.get(2).getNombreVar()+ '\n';
+            assembler = assembler + "FLD" + " " + elementos.get(1).getNombreVar() + '\n';
+            assembler = assembler + "FCOM" + " " + elementos.get(2).getNombreVar() + '\n';
+            assembler = assembler + "FSTSW" + " " + "aux_mem_2bytes" + '\n';
+            assembler = assembler + "MOV" + " " + "AX ," + "aux_mem_2bytes" + '\n';
+            assembler = assembler + "SAHF" + '\n';
 
-            if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
+            /*if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
+                assembler = assembler + crearAssemblerConversionVar(registro1,1);
+                registro1=registroAux;
+            }*/
+
+        }
+
+
+
+            /*
+            if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
                 assembler = assembler + crearAssemblerConversionVar(registro1,1);
                 registro1=registroAux;
             }
@@ -109,10 +124,10 @@ public class TercetoComparacion extends Terceto {
                         assembler =assembler + CMP + " " + registro1 + ", " + terceto2.getRegistro() + '\n';
                         controladorTercetos.liberarRegistro(registro1);
                         controladorTercetos.liberarRegistro(terceto2.getRegistro());
-                    }
+                    }*/
         return assembler;
     }
-
+    /*
     private String crearAssemblerConversion(Terceto terceto,int pos){
         String assembler = "";
         assembler = assembler + "MOV"  + " " + "AX" + ", " + terceto.getRegistro() + '\n';
@@ -137,5 +152,6 @@ public class TercetoComparacion extends Terceto {
         assembler = assembler + "MOV"  + " " + registro + ", " + "EAX" + '\n';
         elementos.get(pos).getToken().setTipo(AnalizadorLexico.variableI);
         return assembler;
-    }*/
+    }
+*/
 }

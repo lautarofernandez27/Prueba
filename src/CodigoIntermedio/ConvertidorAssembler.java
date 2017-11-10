@@ -16,8 +16,9 @@ import AnalizadorLexico.TablaSimbolos;
 
 public class ConvertidorAssembler {
 
-    public static final String labelDivCero = "LabelDivCero";
-    public static final String labelOverflow = "LabelOverflow";
+    public static final String labelDivCero = "DividirCero";
+    public static final String labelOverflowSuma = "OverflowSuma";
+    public static final String labelOverflowMult = "OverflowMultiplicacion";
 
     static ControladorTercetos controladorTercetos;
     static TablaSimbolos tablaSimb;
@@ -73,7 +74,9 @@ public class ConvertidorAssembler {
                 + '\n' +".data" + '\n');
         String data = tablaSimb.getAssembler() ;
         data = data + controladorTercetos.getPrintsAssembler();
-        data = data + "DividirCero db \"Error al dividir por cero!\", 0" + '\n';
+        data = data + labelDivCero + " db \"Error al dividir por cero!\", 0" + '\n';
+        data = data + labelOverflowSuma + " db \"La suma ha generado un Overflow!\", 0" + '\n';
+        data = data + labelOverflowMult + " db \"La multiplicacion ha generado un Overflow!\", 0" + '\n';
 //		data = data + controladorTercetos.getVarAux();
         data = data + '\n' + ".code"+ "\n";
 
@@ -86,7 +89,7 @@ public class ConvertidorAssembler {
 
         bw.write( code );
         String errores = getErroresRunTime();
-        bw.write(errores);
+        //bw.write(errores);
         bw.write( "end start" );
 
         bw.close();
@@ -94,7 +97,13 @@ public class ConvertidorAssembler {
 
     private static String getErroresRunTime() {
         String errores = labelDivCero + ":" + '\n';
-        errores = errores + "invoke MessageBox, NULL, addr DividirCero, addr DividirCero, MB_OK" + '\n';
+        errores = errores + "invoke MessageBox, NULL, addr "+labelDivCero+", addr "+labelDivCero+", MB_OK" + '\n';
+        errores = errores + "invoke ExitProcess, 0" + '\n';
+        errores = errores + labelOverflowSuma + ":" + '\n';
+        errores = errores + "invoke MessageBox, NULL, addr "+labelOverflowSuma+", addr "+labelOverflowSuma+", MB_OK" + '\n';
+        errores = errores + "invoke ExitProcess, 0" + '\n';
+        errores = errores + labelOverflowMult + ":" + '\n';
+        errores = errores + "invoke MessageBox, NULL, addr "+labelOverflowMult+", addr "+labelOverflowMult+", MB_OK" + '\n';
         errores = errores + "invoke ExitProcess, 0" + '\n';
         return errores;
     }
