@@ -105,6 +105,8 @@ public class TablaSimbolos {
         AnalizadorLexico analizador = new AnalizadorLexico(null, null); //es para usar las constantes
 
         if ( t.getTipo() == analizador.variableL || t.getTipo() == analizador.variableF){
+            if (t.getTipo()==analizador.variableF)
+                t.setNombre(t.getNombre().replace(',','.'));
             tipo = trentaydosBits;
         }
         else

@@ -1,5 +1,5 @@
 a:FLOAT.
 b:FLOAT.
-IF (a<b) THEN
-    OUT('jajaja').
-ENDIF.
+WHILE (a<b) DO
+OUT('El DERECHO es menor').
+.
