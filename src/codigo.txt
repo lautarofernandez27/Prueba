@@ -1,5 +1,5 @@
 a:FLOAT.
 b:FLOAT.
-IF (2<3) THEN
-    OUT('jajaja').
-END_IF
+WHILE (a<b) DO
+OUT('El DERECHO es menor').
+.

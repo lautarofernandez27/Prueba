@@ -421,7 +421,7 @@ while_do  :  WHILE {
              }
               '(' condicion ')' DO  {
                                     	TercetoWhile terceto = new TercetoWhile ( new TercetoSimple( (new Token( controladorTercetos.BF) ) ), new TercetoSimple(new Token( controladorTercetos.numeroTercetoString() ) ), null, controladorTercetos.getProxNumero() );
-                                    	//terceto.setTipoSalto(((Token)$5.obj).getNombre());
+                                    	terceto.setTipoSalto(((Token)$4.obj).getNombre());
                                     	controladorTercetos.addTerceto(terceto);
                                     	controladorTercetos.apilar();
                 }
