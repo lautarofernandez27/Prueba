@@ -1,9 +1,4 @@
 a:FLOAT.
-b:FLOAT.
-a=1.1.
-b=2,0.
-IF(a<b)THEN
-OUT('ENTRE AL IF').
-ELSE
-OUT('NO ENTRE AL IF').
-END_IF.
+b:LONG.
+
+a=L_F(b).

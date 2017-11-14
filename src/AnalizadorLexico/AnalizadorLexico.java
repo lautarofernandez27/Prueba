@@ -199,7 +199,7 @@ public class AnalizadorLexico {
                 case "WHILE": return WHILE;
                 case "DO": return DO;
                 case "LET": return LET;
-                case "L_D": return L_F;
+                case "L_F": return L_F;
                 default: return ID;
             }
         }

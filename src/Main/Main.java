@@ -47,9 +47,9 @@ public class Main {
     public static void main (String [] args) throws IOException {
         //String direccion = new String("C:\\Users\\lauta\\IdeaProjects\\Prueba24\\src\\codigo.txt");
 
-        //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\A1.txt");
+        String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
 
-        String direccion = new String(args[0]);
+        //String direccion = new String(args[0]);
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         System.out.println("COMPILADORG7\n");
@@ -78,12 +78,12 @@ public class Main {
         parser.run();
 
 
-        //System.out.print(analizadorLexico.mostrarTokens());
+        System.out.print(analizadorLexico.mostrarTokens());
         System.out.println( analizadorLexico.mostrarTs() );
         System.out.println(analizadorLexico.mostrarWarning());
         System.out.println(analizadorLexico.mostrarErrorComp());
         System.out.println(analizadorSintactico.getErroresSint());
-        //System.out.println(analizadorSintactico.getEstructuras());
+        System.out.println(analizadorSintactico.getEstructuras());
         System.out.println(analizadorCodigoIntermedio.getErroresCI());
         if ( analizadorCodigoIntermedio.hayErrores() || analizadorLexico.hayErrores() || analizadorSintactico.hayErrores() )
             System.out.println( "No se genera codigo intermedio por errores en el codigo" );
