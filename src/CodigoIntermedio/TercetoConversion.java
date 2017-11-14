@@ -9,7 +9,7 @@ public class TercetoConversion extends Terceto {
     @Override
     public String getAssembler() {
         String assembler = "";
-        assembler = assembler +'\n';
+        assembler = assembler + "CVTLF " +'\n';
         return assembler;
     }
 

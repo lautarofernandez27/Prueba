@@ -151,12 +151,20 @@ expresion  :  expresion '+'  termino{	String valor ="+";
                                                                                          analizadorS.addError (new Error ( analizadorS.errorTiposCompatibles,"ERROR SINTACTICO", controladorArchivo.getLinea() ));
 
                                     									}
-           |  L_F '(' expresion ')' {   TercetoConversion terceto = new TercetoConversion (new TercetoSimple (new Token ("ltof",analizadorL.L_F)),new TercetoSimple((Token)$3.obj),null,controladorTercetos.getProxNumero());
-                                        controladorTercetos.addTerceto (terceto);
-                                        Token nuevo = new Token( controladorTercetos.numeroTercetoString());
-                                       	nuevo.setTipo("float");
-                                        $$ = new ParserVal(nuevo);
-                                        analizadorS.addEstructura (new Error ( analizadorS.estructuraCONVERSION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));}
+           |  L_F '(' expresion ')' {
+                                        if(((Token)$3.obj).getTipo() == "long"){
+                                            TercetoConversion terceto = new TercetoConversion (new TercetoSimple (new Token ("ltof",analizadorL.L_F)),new TercetoSimple((Token)$3.obj),null,controladorTercetos.getProxNumero());
+                                            controladorTercetos.addTerceto (terceto);
+                                            Token nuevo = new Token( controladorTercetos.numeroTercetoString());
+                                            nuevo.setTipo("float");
+                                            $$ = new ParserVal(nuevo);
+                                            analizadorS.addEstructura (new Error ( analizadorS.estructuraCONVERSION,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+                                        }
+
+                                     else{
+                                            analizadorCI.addError (new Error ( analizadorCI.errorFaltaL_F,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
+                                        }}
+
            |  termino           { $$ = new ParserVal((Token)$1.obj); }
            ;
 
