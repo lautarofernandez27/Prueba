@@ -8,7 +8,9 @@ public class TercetoConversion extends Terceto {
 
     @Override
     public String getAssembler() {
-        return null;
+        String assembler = "";
+        assembler = assembler +'\n';
+        return assembler;
     }
 
 

@@ -8,7 +8,7 @@ public class TercetoEtiqueta extends Terceto {
 
     @Override
     public String getAssembler() {
-        return "label"+numeroTerceto+":"+"\n";
+        return "Label"+numeroTerceto+":"+"\n";
     }
 
 }

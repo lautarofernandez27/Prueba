@@ -10,6 +10,8 @@ public class TablaSimbolos {
     public static final String trentaydosBits = "dd";
     private Hashtable<String, Token> tSimb;
 
+    ArrayList<Token> variablesAux = new ArrayList<>();
+
     ArrayList<Token> prints = new ArrayList<Token>();
 
     public TablaSimbolos(){
@@ -27,6 +29,9 @@ public class TablaSimbolos {
             tSimb.put(t.getNombre(), t);
     }
 
+    public void addVarAux(Token t){
+        variablesAux.add(t);
+    }
 
     //Me confirma si el token es agregable a la tabla de simbolos.
     public boolean es_Agregable( Token t){
@@ -90,11 +95,20 @@ public class TablaSimbolos {
         ArrayList<Token> tokens = getTokens();
         String assembler = "";
         for (Token t: tokens){
-            if  ( (t.getUso() != AnalizadorLexico.CTEL) || (t.getUso() != AnalizadorLexico.CTEF)){
+            if(t.getUso() == AnalizadorLexico.CTEF){
+                String nomDecFloat = t.getNombre().replace(',','a').replace('-','n');
+                String nomInicFloat = t.getNombre().replace(',','.');
+                assembler = assembler + "auxf"+nomDecFloat+" "+ trentaydosBits +" "+nomInicFloat+'\n';
+            }
+            else
+            if  (t.getUso() != AnalizadorLexico.CTEL){
                 String tipoAssembler = getTipoAssember(t);
                 if(t.getUso() != AnalizadorLexico.CADENA)
                     assembler = assembler + t.getNombre()+ " " + tipoAssembler + '\n';
             }
+        }
+        for (Token t : variablesAux){
+            assembler=assembler+ "auxiliar"+t.getNombre() +" dd 0"+'\n';
         }
         return assembler;
     }

@@ -32,33 +32,46 @@ public class TercetoComparacion extends Terceto {
         if (!elementos.get(2).esToken())
             terceto2 = controladorTercetos.getTerceto( Integer.parseInt( elementos.get(2).getNombreVar() ) );
 
-
         //caso 1: (OP, variable, variable)
         if ( ( elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
-
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
-                assembler = assembler + "MOV " + reg3Long+ "," + elementos.get(1).getNombreVar() + '\n';
-                assembler = assembler + CMP + " " + reg3Long+ "," + elementos.get(2).getNombreVar() + '\n';
+                assembler = assembler + "MOV " + reg3Long+ ", " + elementos.get(1).getNombreVar() + '\n';
+                assembler = assembler + CMP + " " + reg3Long+ ","  + elementos.get(2).getNombreVar() + '\n';
             }
             else
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
-                assembler = assembler + "FLD " + elementos.get(1).getNombreVar() + '\n';
-                assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
+               if (elementos.get(2).getToken().getUso()==AnalizadorLexico.CTEF)
+                    assembler = assembler + "FLD " + "auxf" +elementos.get(2).getNombreVar().replace(',','a').replace('-','n') + '\n';
+                else
+                    assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
+
+                if (elementos.get(1).getToken().getUso()==AnalizadorLexico.CTEF)
+                    assembler = assembler + "FLD " + "auxf" + elementos.get(1).getNombreVar().replace(',','a').replace('-','n') + '\n';
+                else
+                    assembler = assembler + "FLD " + elementos.get(1).getNombreVar() + '\n';
                 assembler = assembler + "FCOM" + '\n';
+                assembler = assembler + "FSTSW AX" + '\n';
+                assembler = assembler + "SAHF" + '\n';
             }
         }
         else
         //caso 2: (OP, registro, variable)
         if ( ( !elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ){
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
-                assembler = assembler + "MOV " + reg3Long +" , "+elementos.get(2).getNombreVar()+'\n';
-                assembler = assembler + CMP + " " + AUX+terceto1.getNumeroTerceto()+","+ reg3Long+ '\n';
+                assembler = assembler + "MOV " + reg3Long +", "+elementos.get(2).getNombreVar()+'\n';
+                assembler = assembler + CMP + " " + AUX+terceto1.getNumeroTerceto()+", "+ reg3Long+ '\n';
             }
             else
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
+
+                if (elementos.get(2).getToken().getUso()==AnalizadorLexico.CTEF)
+                    assembler = assembler + "FLD " + "auxf" + elementos.get(2).getNombreVar().replace(',','a').replace('-','n') + '\n';
+                else
+                    assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
                 assembler = assembler + "FLD " + AUX+terceto1.getNumeroTerceto() + '\n';
-                assembler = assembler + "FLD " + elementos.get(2).getNombreVar() + '\n';
                 assembler = assembler + "FCOM" + '\n';
+                assembler = assembler + "FSTSW AX" + '\n';
+                assembler = assembler + "SAHF" + '\n';
             }
         }
 
@@ -66,29 +79,36 @@ public class TercetoComparacion extends Terceto {
         //caso 3: (OP, registro, registro)
         if ( ( !elementos.get(1).esToken() ) && ( !elementos.get(2).esToken() ) ){
             if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
-                assembler = assembler + "MOV " +AUX+terceto1.getNumeroTerceto()+","+elementos.get(1).getNombreVar()+'\n';
-                assembler = assembler + "MOV " +AUX+terceto2.getNumeroTerceto()+","+elementos.get(2).getNombreVar()+'\n';
-                assembler = assembler + CMP + " " +AUX+terceto1.getPosicionTerceto()+","+AUX+terceto2.getPosicionTerceto()+'\n';
+                assembler = assembler + "MOV " +AUX+terceto1.getNumeroTerceto()+", "+elementos.get(1).getNombreVar()+'\n';
+                assembler = assembler + "MOV " +AUX+terceto2.getNumeroTerceto()+", "+elementos.get(2).getNombreVar()+'\n';
+                assembler = assembler + CMP + " " +AUX+terceto1.getPosicionTerceto()+", "+AUX+terceto2.getPosicionTerceto()+'\n';
             }
             else
             if ( (elementos.get(1).getToken().getTipo().equals( AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
-                assembler = assembler + "FLD " + AUX+terceto1.getNumeroTerceto() + '\n';
                 assembler = assembler + "FLD " + AUX+terceto2.getNumeroTerceto() + '\n';
+                assembler = assembler + "FLD " + AUX+terceto1.getNumeroTerceto() + '\n';
                 assembler = assembler + "FCOM" + '\n';
+                assembler = assembler + "FSTSW AX" + '\n';
+                assembler = assembler + "SAHF" + '\n';
             }
         }
         else
         //caso 4: (OP, variable, registro)
         if ( ( elementos.get(1).esToken() ) && ( !elementos.get(2).esToken() ) ){
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableL) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableL)) ){
-                assembler = assembler + "MOV " + reg3Long +" , "+elementos.get(1).getNombreVar()+'\n';
-                assembler = assembler + CMP + " " + reg3Long +","+AUX+terceto2.getNumeroTerceto()+ '\n';
+                assembler = assembler + "MOV " + reg3Long +", "+elementos.get(1).getNombreVar()+'\n';
+                assembler = assembler + CMP + " " + reg3Long +", "+AUX+terceto2.getNumeroTerceto()+ '\n';
             }
             else
             if ( (elementos.get(1).getToken().getTipo().equals(AnalizadorLexico.variableF) ) && (elementos.get(2).getToken().getTipo().equals(AnalizadorLexico.variableF)) ){
-                assembler = assembler + "FLD " + elementos.get(1).getNombreVar() + '\n';
                 assembler = assembler + "FLD " + AUX+terceto2.getNumeroTerceto() + '\n';
+                if (elementos.get(1).getToken().getUso()==AnalizadorLexico.CTEF)
+                    assembler = assembler + "FLD " + "auxf" + elementos.get(1).getNombreVar().replace(',','a').replace('-','n') + '\n';
+                else
+                    assembler = assembler + "FLD " + elementos.get(1).getNombreVar() + '\n';
                 assembler = assembler + "FCOM" + '\n';
+                assembler = assembler + "FSTSW AX" + '\n';
+                assembler = assembler + "SAHF" + '\n';
             }
         }
         return assembler;

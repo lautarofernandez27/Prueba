@@ -89,20 +89,20 @@ public class ConvertidorAssembler {
 
         bw.write( code );
         String errores = getErroresRunTime();
-        //bw.write(errores);
+        bw.write(errores);
         bw.write( "end start" );
 
         bw.close();
     }
 
     private static String getErroresRunTime() {
-        String errores = labelDivCero + ":" + '\n';
+        String errores = "Label"+labelDivCero + ":" + '\n';
         errores = errores + "invoke MessageBox, NULL, addr "+labelDivCero+", addr "+labelDivCero+", MB_OK" + '\n';
         errores = errores + "invoke ExitProcess, 0" + '\n';
-        errores = errores + labelOverflowSuma + ":" + '\n';
+        errores = errores + "Label"+labelOverflowSuma + ":" + '\n';
         errores = errores + "invoke MessageBox, NULL, addr "+labelOverflowSuma+", addr "+labelOverflowSuma+", MB_OK" + '\n';
         errores = errores + "invoke ExitProcess, 0" + '\n';
-        errores = errores + labelOverflowMult + ":" + '\n';
+        errores = errores + "Label"+labelOverflowMult + ":" + '\n';
         errores = errores + "invoke MessageBox, NULL, addr "+labelOverflowMult+", addr "+labelOverflowMult+", MB_OK" + '\n';
         errores = errores + "invoke ExitProcess, 0" + '\n';
         return errores;

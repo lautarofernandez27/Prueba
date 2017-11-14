@@ -1,5 +1,9 @@
 a:FLOAT.
 b:FLOAT.
-WHILE (a<b) DO
-OUT('El DERECHO es menor').
-.
+a=1.1.
+b=2,0.
+IF(a<b)THEN
+OUT('ENTRE AL IF').
+ELSE
+OUT('NO ENTRE AL IF').
+END_IF.

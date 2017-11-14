@@ -14,19 +14,19 @@ public class TercetoIf extends Terceto {
 
     public void setTipoSalto(String tipoSalto){
         if(tipoSalto== "<=")
-            this.tipoSalto = "JG";
+            this.tipoSalto = "JA";
         else
         if(tipoSalto.equals("=="))
             this.tipoSalto = "JNE";
         else
         if(tipoSalto.equals(">="))
-            this.tipoSalto = "JL";
+            this.tipoSalto = "JB";
         else
         if(tipoSalto.equals(">"))
-            this.tipoSalto = "JLE";
+            this.tipoSalto = "JBE";
         else
         if(tipoSalto.equals("<"))
-            this.tipoSalto = "JGE";
+            this.tipoSalto = "JAE";
         else
         if(tipoSalto.equals("<>"))
             this.tipoSalto = "JE";
