@@ -163,7 +163,8 @@ expresion  :  expresion '+'  termino{	String valor ="+";
 
                                      else{
                                             analizadorCI.addError (new Error ( analizadorCI.errorFaltaL_F,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
-                                        }}
+                                        }
+                                     }
 
            |  termino           { $$ = new ParserVal((Token)$1.obj); }
            ;
