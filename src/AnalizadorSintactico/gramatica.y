@@ -117,11 +117,35 @@ asignacion  : ID  '=' expresion'.'{  analizadorS.addEstructura (new Error ( anal
 }
             |   LET  ID  '=' expresion'.'   {
                                                  Token t = tablaSimbolo.getToken( ( (Token) $2.obj).getNombre() );
-                                                 if  ( t == null )
-                                                 		analizadorCI.addError (new Error ( analizadorCI.errorNoExisteVariable,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
-
                                                  String valor ="=";
             									Token t2 = (Token) $4.obj;
+                                                 if  ( t == null ){
+                                                 		//analizadorCI.addError (new Error ( analizadorCI.errorNoExisteVariable,"ERROR DE GENERACION DE CODIGO INTERMEDIO", controladorArchivo.getLinea()  ));
+                                                       if(t2.getTipo().equals(AnalizadorLexico.variableL)){
+                                                             String nombre = ((Token) $2.obj).getNombre();
+                                                             Token nuevo = new Token(nombre,analizadorL.ID);
+                                                             nuevo.setTipo(AnalizadorLexico.variableL);
+                                                             tablaSimbolo.addSimbolo(nuevo);
+                                                             TercetoLet terceto = new TercetoLet ( new TercetoSimple( (Token)$1.obj ),new TercetoSimple( (Token)$2.obj ), null, controladorTercetos.getProxNumero() );
+                                                             controladorTercetos.addTerceto (terceto);
+                                                             analizadorS.addEstructura (new Error ( analizadorS.estructuraLET,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+                                                             TercetoAsignacion tercetoA = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple(nuevo),  new TercetoSimple( (Token)$4.obj ), controladorTercetos.getProxNumero() );
+                                                             controladorTercetos.addTerceto (tercetoA);
+                                                       }
+                                                       else{
+                                                            String nombre = ((Token) $2.obj).getNombre();
+                                                            Token nuevo = new Token(nombre,analizadorL.ID);
+                                                            nuevo.setTipo(AnalizadorLexico.variableF);
+                                                            tablaSimbolo.addSimbolo(nuevo);
+                                                            TercetoLet terceto = new TercetoLet ( new TercetoSimple( (Token)$1.obj ),new TercetoSimple( (Token)$2.obj ), null, controladorTercetos.getProxNumero() );
+                                                            controladorTercetos.addTerceto (terceto);
+                                                            analizadorS.addEstructura (new Error ( analizadorS.estructuraLET,"ESTRUCTURA SINTACTICA", controladorArchivo.getLinea() ));
+                                                            TercetoAsignacion tercetoA = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple(nuevo),  new TercetoSimple( (Token)$4.obj ), controladorTercetos.getProxNumero() );
+                                                            controladorTercetos.addTerceto (tercetoA);
+                                                       }
+                                                       TercetoAsignacion terceto = new TercetoAsignacion ( new TercetoSimple( new Token("=",(int)valor.charAt(0) ) ),new TercetoSimple((Token) $2.obj),  new TercetoSimple( (Token)$4.obj ), controladorTercetos.getProxNumero() );
+                                                       controladorTercetos.addTerceto (terceto);
+                                                    }
             									if ( (t != null) && (t2 != null) ){
             									    if(tipoCompatibleLet(t,t2)){
             									        String nombre = t.getNombre().substring(0,t.getNombre().length()-2);
