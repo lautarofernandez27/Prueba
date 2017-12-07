@@ -6,10 +6,10 @@ import AnalizadorLexico.Token;
 public class TercetoExpresion extends Terceto {
 
     public final static String MOV = "MOV";
-    public final static String ADD = "ADD";
-    public final static String SUB = "SUB";
+    public final static String ADD = "ADD ";
+    public final static String SUB = "SUB ";
     public final static String MULT = "IMUL";
-    public final static String DIV = "DIV";
+    public final static String DIV = "IDIV";
 
 
 
@@ -21,8 +21,8 @@ public class TercetoExpresion extends Terceto {
 
 
     private String convertirOperador(String op){
-        if (op == "+") return "ADD";
-        if (op == "-") return "SUB";
+        if (op == "+") return "ADD ";
+        if (op == "-") return "SUB ";
         return "0";
     }
 
@@ -73,11 +73,11 @@ public class TercetoExpresion extends Terceto {
         if ( (!elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
             if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-                assembler = assembler + MOV + reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
+                assembler = assembler + MOV + " "+ reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
 
                 assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
 
-                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+                assembler = assembler + MOV + " "+ AUX + numeroTerceto + ", " + reg3Long + '\n';
 
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
@@ -100,11 +100,11 @@ public class TercetoExpresion extends Terceto {
         if ( (elementos.get(1).esToken() ) && ( !elementos.get(2).esToken() ) ) {
             if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-                assembler = assembler + MOV + reg3Long + "," + elementos.get(1).getNombreVar() + '\n';
+                assembler = assembler + MOV + " "+ reg3Long + "," + elementos.get(1).getNombreVar() + '\n';
 
                 assembler = assembler + opAssembler + reg3Long + ", " + AUX +terceto2.getNumeroTerceto()+ '\n';
 
-                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+                assembler = assembler + MOV + " "+ AUX + numeroTerceto + ", " + reg3Long + '\n';
 
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
@@ -128,11 +128,11 @@ public class TercetoExpresion extends Terceto {
         if ( (!elementos.get(1).esToken() ) && ( !elementos.get(2).esToken() ) ) {
             if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-                assembler = assembler + MOV + reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
+                assembler = assembler + MOV + " "+ reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
 
                 assembler = assembler + opAssembler + reg3Long + ", " + AUX +terceto2.getNumeroTerceto() + '\n';
 
-                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+                assembler = assembler + MOV + " "+ AUX + numeroTerceto + ", " + reg3Long + '\n';
 
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }

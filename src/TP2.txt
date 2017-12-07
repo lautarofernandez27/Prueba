@@ -7,7 +7,7 @@ IF (L_D(a+1)<b) THEN
     c=1.
 ELSE
     LET a=2.
-END_IF
+END_IF.
 IF (b<2) THEN
 BEGIN
     a=a+1.
@@ -19,4 +19,4 @@ BEGIN
     END.
     .
 END.
-END_IF
+END_IF.

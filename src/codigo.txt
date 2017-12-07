@@ -1,6 +1,2 @@
-
-IF(4,3+1,>L_F(4+1)) THEN
-OUT('ENTRE').
-ELSE
-OUT('NO ENTRE').
-END_IF.
+a:LONG.
+addddd
