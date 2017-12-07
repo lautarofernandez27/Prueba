@@ -9,7 +9,12 @@ public class TercetoConversion extends Terceto {
     @Override
     public String getAssembler() {
         String assembler = "";
-        assembler = assembler + "CVTLF " +'\n';
+//        Terceto terceto1 = null;
+//        if (!elementos.get(1).esToken()) {
+//            terceto1 = controladorTercetos.getTerceto(Integer.parseInt(elementos.get(1).getNombreVar()));
+//            assembler = assembler + "FLD  " + AUX + terceto1.getNumeroTerceto() + '\n';
+//        }
+        //assembler = assembler + "CVTLF " +'\n';
         return assembler;
     }
 
