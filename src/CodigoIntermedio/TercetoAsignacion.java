@@ -35,9 +35,14 @@ import AnalizadorLexico.AnalizadorLexico;
                 else
                     //caso 2: (ASIG, variable, registro)
                     if (elementos.get(2).getToken().getTipo()==AnalizadorLexico.variableF) {
-                        assembler = assembler + "FLD " + AUX + terceto2.getNumeroTerceto() + '\n';
-                        assembler = assembler + "FST "+ elementos.get(1).getNombreVar() +'\n';
-
+                        if (elementos.get(2).getToken().isConvertido()) {
+                            assembler = assembler + "FILD " + AUX + terceto2.getNumeroTerceto() + '\n';
+                            assembler = assembler + "FST " + elementos.get(1).getNombreVar() + '\n';
+                        }
+                        else{
+                            assembler = assembler + "FLD " + AUX + terceto2.getNumeroTerceto() + '\n';
+                            assembler = assembler + "FST " + elementos.get(1).getNombreVar() + '\n';
+                        }
                     }else {
                         assembler = assembler + "MOV " + reg2Long + ", " + AUX+terceto2.getNumeroTerceto() + '\n';
                         assembler = assembler + "MOV  " + elementos.get(1).getNombreVar() + ", " + reg2Long + '\n';

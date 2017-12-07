@@ -9,12 +9,15 @@ public class TercetoConversion extends Terceto {
     @Override
     public String getAssembler() {
         String assembler = "";
-//        Terceto terceto1 = null;
-//        if (!elementos.get(1).esToken()) {
-//            terceto1 = controladorTercetos.getTerceto(Integer.parseInt(elementos.get(1).getNombreVar()));
-//            assembler = assembler + "FLD  " + AUX + terceto1.getNumeroTerceto() + '\n';
-//        }
-        //assembler = assembler + "CVTLF " +'\n';
+        Terceto terceto1 = null;
+        if (!elementos.get(1).esToken()) {
+            terceto1 = controladorTercetos.getTerceto(Integer.parseInt(elementos.get(1).getNombreVar()));
+            assembler = assembler + "MOV " + reg3Long + ", " + AUX + terceto1.getNumeroTerceto() + '\n';
+        }
+        else
+            assembler = assembler + "MOV " + reg3Long + ", " + elementos.get(1).getNombreVar() + '\n';
+
+        assembler = assembler + "MOV  " + AUX + numeroTerceto + ", " + reg3Long + '\n';
         return assembler;
     }
 

@@ -12,6 +12,9 @@ public class Token {
     //id que identifica el numero de repeticion de una variable
     int id_shadow= 0;
 
+    //booleano que indica si se ha convertido a float
+    boolean convertido= false;
+
     //booleano que indica si el token es un numero de terceto o realmente un token
     boolean numTerceto=false;
 
@@ -112,4 +115,11 @@ public class Token {
         this.nombre = nombre;
     }
 
+    public void convertir(){
+        convertido=true;
+    }
+
+    public boolean isConvertido() {
+        return convertido;
+    }
 }

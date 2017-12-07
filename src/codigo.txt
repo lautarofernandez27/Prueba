@@ -1,4 +1,4 @@
-a:FLOAT.
-b:LONG.
-b=6,5.
-a=b.
+a,b:LONG.
+b=0.
+a=5.
+a=a/0.

@@ -67,7 +67,10 @@ public class TercetoExpresionMult extends TercetoExpresion {
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
             else if (elementos.get(1).getToken().getTipo().equals("float")) {
-                assembler = assembler + "FLD " + AUX +terceto1.getNumeroTerceto() + '\n';
+                if (elementos.get(1).getToken().isConvertido())
+                    assembler = assembler + "FILD " + AUX +terceto1.getNumeroTerceto() + '\n';
+                else
+                    assembler = assembler + "FLD " + AUX +terceto1.getNumeroTerceto() + '\n';
                 if (elementos.get(2).getToken().getUso()== AnalizadorLexico.CTEF)
                     assembler = assembler + "FLD " + "auxf" + elementos.get(2).getNombreVar().replace(',','a').replace('-','n') + '\n';
                 else
@@ -93,7 +96,10 @@ public class TercetoExpresionMult extends TercetoExpresion {
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
             else if (elementos.get(1).getToken().getTipo().equals("float")) {
-                assembler = assembler + "FLD " + AUX +terceto2.getNumeroTerceto() + '\n';
+                if (elementos.get(2).getToken().isConvertido())
+                    assembler = assembler + "FILD " + AUX +terceto2.getNumeroTerceto() + '\n';
+                else
+                    assembler = assembler + "FLD " + AUX +terceto2.getNumeroTerceto() + '\n';
 
                 if (elementos.get(1).getToken().getUso()== AnalizadorLexico.CTEF)
                     assembler = assembler + "FLD " + "auxf" + elementos.get(1).getNombreVar().replace(',','a').replace('-','n') + '\n';
@@ -120,9 +126,14 @@ public class TercetoExpresionMult extends TercetoExpresion {
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
             else if (elementos.get(1).getToken().getTipo().equals("float")) {
-                assembler = assembler + "FLD " + AUX +terceto1.getNumeroTerceto() + '\n';
-
-                assembler = assembler + "FLD " + AUX +terceto2.getNumeroTerceto() + '\n';
+                if (elementos.get(1).getToken().isConvertido())
+                    assembler = assembler + "FILD " + AUX +terceto1.getNumeroTerceto() + '\n';
+                else
+                    assembler = assembler + "FLD " + AUX +terceto1.getNumeroTerceto() + '\n';
+                if (elementos.get(2).getToken().isConvertido())
+                    assembler = assembler + "FILD " + AUX +terceto2.getNumeroTerceto() + '\n';
+                else
+                    assembler = assembler + "FLD " + AUX +terceto2.getNumeroTerceto() + '\n';
 
                 assembler = assembler + "FMUL" + '\n';
 

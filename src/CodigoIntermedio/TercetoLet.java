@@ -7,6 +7,6 @@ public class TercetoLet extends Terceto {
     }
 
     public String getAssembler() {
-        return null;
+        return "";
     }
 }
