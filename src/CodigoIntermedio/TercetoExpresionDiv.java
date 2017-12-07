@@ -17,20 +17,20 @@ public class TercetoExpresionDiv extends TercetoExpresion {
         Terceto terceto2 = null;
         if (!elementos.get(2).esToken())
             terceto2 = controladorTercetos.getTerceto( Integer.parseInt( elementos.get(2).getNombreVar() ) );
-        String opAssembler = "IDIV";
+        String opAssembler = "IDIV ";
 
         //caso 1: (OP, variable, variable)
         if ( ( elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
 
             if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-                assembler = assembler + MOV + reg3Long + "," + elementos.get(1).getNombreVar() + '\n';
+                assembler = assembler + MOV + " "+ reg3Long + "," + elementos.get(1).getNombreVar() + '\n';
 
                 assembler = assembler + getAssemblerErrorDivCero("long");
 
-                assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
+                assembler = assembler + opAssembler + elementos.get(2).getNombreVar() + '\n';
 
-                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+                assembler = assembler + MOV + " " +AUX + numeroTerceto + ", " + reg3Long + '\n';
 
 
             }
@@ -62,7 +62,7 @@ public class TercetoExpresionDiv extends TercetoExpresion {
 
                 assembler = assembler + getAssemblerErrorDivCero("long");
 
-                assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
+                assembler = assembler + opAssembler + elementos.get(2).getNombreVar() + '\n';
 
                 assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
             }
@@ -93,7 +93,7 @@ public class TercetoExpresionDiv extends TercetoExpresion {
 
                 assembler = assembler + getAssemblerErrorDivCero("long");
 
-                assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(1).getNombreVar() + '\n';
+                assembler = assembler + opAssembler + elementos.get(1).getNombreVar() + '\n';
 
                 assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
             }
@@ -123,7 +123,7 @@ public class TercetoExpresionDiv extends TercetoExpresion {
 
                 assembler = assembler + getAssemblerErrorDivCero("long");
 
-                assembler = assembler + opAssembler + reg3Long + ", " + AUX +terceto2.getNumeroTerceto() + '\n';
+                assembler = assembler + opAssembler + reg3Long + AUX +terceto2.getNumeroTerceto() + '\n';
 
                 assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
             }

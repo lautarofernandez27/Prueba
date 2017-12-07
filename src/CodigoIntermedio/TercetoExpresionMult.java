@@ -59,11 +59,11 @@ public class TercetoExpresionMult extends TercetoExpresion {
         if ( (!elementos.get(1).esToken() ) && ( elementos.get(2).esToken() ) ) {
             if (elementos.get(1).getToken().getTipo().equals("long")) {
 
-                assembler = assembler + MOV + reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
+                assembler = assembler + MOV + " "+ reg3Long + "," + AUX +terceto1.getNumeroTerceto() + '\n';
 
                 assembler = assembler + opAssembler + reg3Long + ", " + elementos.get(2).getNombreVar() + '\n';
 
-                assembler = assembler + MOV + AUX + numeroTerceto + ", " + reg3Long + '\n';
+                assembler = assembler + MOV + " "+ AUX + numeroTerceto + ", " + reg3Long + '\n';
                 assembler = assembler + getAssemblerErrorOverflow("long")+'\n';
             }
             else if (elementos.get(1).getToken().getTipo().equals("float")) {
