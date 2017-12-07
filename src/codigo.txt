@@ -1,2 +1,4 @@
-a:LONG.
-addddd
+a:FLOAT.
+b:LONG.
+b=6,5.
+a=b.
